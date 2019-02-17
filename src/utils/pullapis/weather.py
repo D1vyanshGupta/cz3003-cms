@@ -47,23 +47,23 @@ class WeatherAPI:
             json_data = json.loads(r.text)
             area_metadata = json_data['area_metadata']
 
-            district_info = {}
+            area_info = {}
             for area_data in area_metadata:
-                district_name = area_data['name']
+                area_name = area_data['name']
                 lat = area_data['label_location']['latitude']
                 long = area_data['label_location']['longitude']
-                district_info[district_name] = {'latitude': lat, 'longitude': long}
+                area_info[area_name] = {'latitude': lat, 'longitude': long}
 
             forecasts = json_data['items'][0]['forecasts']
 
             for area_forecast in forecasts:
-                district_name = area_forecast['area']
-                district_forecast = area_forecast['forecast']
-                district_info[district_name]['forecast'] = district_forecast
+                area_name = area_forecast['area']
+                forecast = area_forecast['forecast']
+                area_info[area_name]['forecast'] = forecast
 
-            for district_name, info in district_info.items():
+            for area_name, info in area_info.items():
                 weather_obj, created = Weather.objects.update_or_create(
-                district_name=district_name, location=Point(info['longitude'], info['latitude']))
+                area_name=area_name, location=Point(info['longitude'], info['latitude']))
                 weather_obj.condition = info['forecast']
                 weather_obj.save()
 
@@ -177,7 +177,7 @@ class WeatherAPI:
                 },
                 'properties': {
                     'type': 'weather',
-                    'name': w.district_name,
+                    'name': w.area_name,
                     'condition_short': short_form,
                     'condition_long': w.condition,
                     'icon': icon

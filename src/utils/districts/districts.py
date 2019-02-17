@@ -14,7 +14,7 @@ class DistrictManager():
     """
         handles district shp files
     """
-    DISTRICT_SHP_FILENAME = "cms/districts/SGP_adm1.shp"
+    DISTRICT_SHP_FILENAME = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'SGP_adm1.shp')
     EAST_CENTER = Point(1.3573764, 103.9397103)
     NORTH_EAST_CENTER = Point(1.382384, 103.876254)
     NORTH_CENTER = Point(1.4215094, 103.7952563)
@@ -26,7 +26,7 @@ class DistrictManager():
         command_to_run = "shp2pgsql -d -W LATIN1 %s cms_singapore | psql -d cms" % self.DISTRICT_SHP_FILENAME
         os.system(command_to_run)
         for x in Singapore.objects.all():
-            d, created = Districts.objects.get_or_create(
+            d, created = District.objects.get_or_create(
                 district=x.name_1)
             if (d.district == "East"):
                 d.center = self.EAST_CENTER
@@ -44,15 +44,16 @@ class DistrictManager():
         """
             returns GeoJsonData for district boundaries
         """
-        # self.import_districts()
+        if Singapore.objects.count() == 0:
+            self.import_districts()
         singapore = Singapore.objects.all()
         singaporeJson = json.loads(serialize('geojson', singapore))
         for x in singaporeJson['features']:
             x['properties']['type'] = 'district'
-            x['properties']['crisis'] = Districts.objects.get(
+            x['properties']['crisis'] = District.objects.get(
                 district=x['properties']['name_1']).crisis
-            x['properties']['center'] = [float(Districts.objects.get(district=x['properties']['name_1']).center.x), float(
-                Districts.objects.get(district=x['properties']['name_1']).center.y)]
+            x['properties']['center'] = [float(District.objects.get(district=x['properties']['name_1']).center.x), float(
+                District.objects.get(district=x['properties']['name_1']).center.y)]
         return singaporeJson
 
 
@@ -66,7 +67,7 @@ class CrisisManager ():
         """
             Sets crisis level of a specified district and add to log
         """
-        d = Districts.objects.get(district=district_to_set)
+        d = District.objects.get(district=district_to_set)
         if (d is not None):
             d.crisis = crisis_to_set
             d.save()
@@ -78,15 +79,17 @@ class CrisisManager ():
         """
                 returns GeoJsonData for district boundaries
         """
-        # self.importDistricts()
+        if Singapore.objects.count() == 0:
+            self.import_districts()
+            
         singapore = Singapore.objects.all()
         singaporeJson = json.loads(serialize('geojson', singapore))
         for x in singaporeJson['features']:
             x['properties']['type'] = 'district'
-            x['properties']['crisis'] = Districts.objects.get(
+            x['properties']['crisis'] = District.objects.get(
                 district=x['properties']['name_1']).crisis
-            x['properties']['center'] = [float(Districts.objects.get(district=x['properties']['name_1']).center.x), float(
-                Districts.objects.get(district=x['properties']['name_1']).center.y)]
+            x['properties']['center'] = [float(District.objects.get(district=x['properties']['name_1']).center.x), float(
+                District.objects.get(district=x['properties']['name_1']).center.y)]
         return singaporeJson
 
 
@@ -100,7 +103,7 @@ class CrisisManager ():
         """
                 Sets crisis level of a specified district and add to log
         """
-        d = Districts.objects.get(district=district_to_set)
+        d = District.objects.get(district=district_to_set)
         if (d is not None):
             d.crisis = crisis_to_set
             d.save()

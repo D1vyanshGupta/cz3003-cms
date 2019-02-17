@@ -109,35 +109,35 @@
           zoom: 11
         });
 
-        $.ajax({
-    		url: '/get_events_geo_JSON',
-    		data: {},
-    		dataType: 'json'
-    	}).done(function(data, textStatus, jqXHR) {
-            eventsGeoJSON = data['geojson'];
-    		map.data.addGeoJson(data['geojson']);
-    	}).fail(function(){
-    		console.log('failed'); // some proper failure message
-    	});
+      //   $.ajax({
+    	// 	url: '/utils/get_events_geo_JSON',
+    	// 	data: {},
+    	// 	dataType: 'json'
+    	// }).done(function(data, textStatus, jqXHR) {
+      //       eventsGeoJSON = data['geojson'];
+    	// 	map.data.addGeoJson(data['geojson']);
+    	// }).fail(function(){
+    	// 	console.log('failed'); // some proper failure message
+    	// });
+
+	      $.ajax({
+	              url: '/utils/get_weather_info',
+	              dataType: 'json'
+	          }).done(function (data) {
+	               weatherGeoJSON = data;
+	               map.data.addGeoJson(data);
+	          });
 
         $.ajax({
-                url: '/get_weather_info',
-                dataType: 'json'
-            }).done(function (data) {
-                 weatherGeoJSON = data;
-                 map.data.addGeoJson(data);
-            });
-
-        $.ajax({
-                url: '/get_dengue_info',
+                url: '/utils/get_dengue_info',
                 dataType: 'json'
             }).done(function (data) {
                 dengueGeoJSON = data;
                 map.data.addGeoJson(data);
-        })
+        });
 
         $.ajax({
-            url: '/get_district_info',
+            url: '/utils/get_district_info',
             dataType: 'json'
         }).done(function (data) {
             districtGeoJSON = data;
@@ -263,7 +263,7 @@
     $(document).ready(function(){
         $('#refreshAPI').click(function() {
              $.ajax({
-                url: 'utils/refreshAPI',
+                url: '/utils/refreshAPI',
             }).done (function() {
                 location.reload();
             })

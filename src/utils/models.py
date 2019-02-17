@@ -7,7 +7,7 @@ class Weather(gismodels.Model):
         Caches information pulled from weather API
             - weather condition
     """
-    district_name = models.CharField(max_length=128, primary_key=True)
+    area_name = models.CharField(max_length=128, primary_key=True)
     location = gismodels.PointField()
     condition = models.CharField(max_length=128, blank=True)
 
@@ -36,19 +36,19 @@ class Dengue(models.Model):
             - dengue hotspots
     """
     gid = models.AutoField(primary_key=True)
-    object_id = models.IntegerField(blank=True, null=True)
-    locality = models.CharField(max_length=254, blank=True, null=True)
-    case_size = models.SmallIntegerField(blank=True, null=True)
-    name = models.CharField(max_length=254, blank=True, null=True)
-    hyperlink = models.CharField(max_length=254, blank=True, null=True)
-    shape_leng = models.DecimalField(
-        max_digits=65535, decimal_places=65535, blank=True, null=True)
-    shape_area = models.DecimalField(
-        max_digits=65535, decimal_places=65535, blank=True, null=True)
+    # locality = models.CharField(max_length=254, blank=True, null=True)
+    # case_size = models.SmallIntegerField(blank=True, null=True)
+    name = models.CharField(max_length=80, blank=True, null=True)
+    description = models.CharField(max_length=254, blank=True, null=True)
+    # hyperlink = models.CharField(max_length=254, blank=True, null=True)
+    # shape_leng = models.DecimalField(
+    #     max_digits=1000, decimal_places=1000, blank=True, null=True)
+    # shape_area = models.DecimalField(
+    #     max_digits=1000, decimal_places=1000, blank=True, null=True)
     geom = gismodels.GeometryField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'cms_dengue'
         verbose_name_plural = 'Dengue Objects'
 
@@ -187,8 +187,11 @@ class Singapore(models.Model):
     varname_1 = models.CharField(max_length=150, blank=True, null=True)
     geom = gismodels.GeometryField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name_0 + ' ' + self.name_1
+
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'cms_singapore'
         verbose_name_plural = 'Singapore Objects'
 
