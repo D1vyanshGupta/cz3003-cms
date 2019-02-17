@@ -79,7 +79,7 @@
         </thead>
         {% for haze in data.haze %}
             <tr>
-                <td> {{ haze.districtname }} </td> <td> {{ haze.PSI }} </td>   <td> {{ haze.PM10 }}</td> <td> {{ haze.PM25 }}</td>
+                <td> {{ haze.region_name }} </td> <td> {{ haze.psi }} </td>   <td> {{ haze.pm_10 }}</td> <td> {{ haze.pm_25 }}</td>
             </tr>
         {% endfor %}
     </table>
@@ -115,11 +115,11 @@
     		dataType: 'json'
     	}).done(function(data, textStatus, jqXHR) {
             eventsGeoJSON = data['geojson'];
-    		map.data.addGeoJson(data['geojson']);                
+    		map.data.addGeoJson(data['geojson']);
     	}).fail(function(){
     		console.log('failed'); // some proper failure message
     	});
-        
+
         $.ajax({
                 url: '/get_weather_info',
                 dataType: 'json'
@@ -135,14 +135,14 @@
                 dengueGeoJSON = data;
                 map.data.addGeoJson(data);
         })
-        
+
         $.ajax({
             url: '/get_district_info',
             dataType: 'json'
         }).done(function (data) {
             districtGeoJSON = data;
              map.data.addGeoJson(data);
-        });  
+        });
 
         map.data.addListener('click', function(event) {
             var feature = event.feature
@@ -174,8 +174,8 @@
                 infowindow.setPosition(feature.getGeometry().get());
                 infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
                 infowindow.open(map);
-            } 
-        });  
+            }
+        });
 
         map.data.setStyle(function(feature) {
             var iconbase = '/static/img/';
@@ -214,7 +214,7 @@
                         strokeWeight: 2
                     }
                 }
-            } 
+            }
             if (type == 'district') {
                 return {
                     clickable: false,
@@ -263,7 +263,7 @@
     $(document).ready(function(){
         $('#refreshAPI').click(function() {
              $.ajax({
-                url: '/refreshAPI',
+                url: 'utils/refreshAPI',
             }).done (function() {
                 location.reload();
             })
@@ -272,8 +272,8 @@
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdsOKjIwnD16rVjw8MsOoEMkVo8BzHWeI&callback=initMap"
+type="text/javascript"></script>
 
 
 {% endblock content %}
