@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+<style>
+
+#content {
+	padding: 0px;
+}
+#map {
+	width: 100%;
+	height: calc(100vh - 70px);
+}
+
+#filters-div {
+    height: 60px;
+    padding: 10px 15px;
+}
+
+.marker-content {
+    width: 150px;
+}
+
+.filter-option {
+    display:inline-block;
+    margin-right: 20px;
+    padding: 10px;
+    border:1px solid #c7c7c7;
+    border-radius: 4px;
+}
+</style>
+
+<div id="map">
+</div>
+
+<div id = "legend">
+    <img src =  "/static/img/crisislegend.png" width = "50px" height="180px"/>
+</div>
+
+
+<script>
+	var marker;
+
+    function generateInfoWindowHtml(event){
+        var html = '<div class="marker-content"><p>' +
+            '<strong> Reported by: </strong> ' + event['name'] + '<br/>' +
+            '<strong> Description: </strong>' + event['description'] + '<br/>' +
+            '<strong> Operator: </strong>' + event['operator'] + '<br/>' +
+            '</p></div>';
+        return html;
+    }
+
+	function initMap() {
+        var mapDiv = document.getElementById('map');
+        var infowindow =  new google.maps.InfoWindow();
+        var weatherGeoJSON, eventsGeoJSON, dengueGeoJSON;
+
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 1.364922150947930, lng: 103.80912780761719},
+          zoom: 11
+        });
+        
+        var getDistricts = function() {
+            $.ajax({
+                url: '/admin/get_districts',
+                dataType: 'json'
+            }).done(function (data) {
+                 map.data.addGeoJson(data);
+            });  
+        };
+
+        getDistricts();
+
+        var crisisSetterForm
+
+        map.data.addListener('click', function(event) {
+            var feature = event.feature
+            var iconbase = '/static/img/';
+            var type = feature.getProperty('type');
+
+            if (type == 'district') {
+                infowindow.setContent("<div style='width:170px; text-align:center; padding: 5px;'><b>"+feature.getProperty('name_1') + "</b><hr style='margin:3px;'/> <img src='" + iconbase+'crisis.png'+"' height= 30px width = 30px/>  Crisis: <span style='font-size: 60px'>"+ feature.getProperty('crisis') +"</span><hr/><div class='setter' ><select style = 'width:100%; background-color:rgba(210, 77, 87, 0.2); padding :2px; margin-bottom:3px;'id ='"+ feature.getProperty('name_1') + "Select'> <option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option> <option value='4'>4</option><option value='5'>5</option></select><button style='background-color:#e74c3c; width:100%; color:white; class='crisisButton' id ='CrisisButton' value='"+feature.getProperty('name_1') +"'>Change</button></div></div>");
+
+                infowindow.setPosition(new google.maps.LatLng(feature.getProperty('center')[0],feature.getProperty('center')[1]));
+                infowindow.open(map);
+            }
+        });  
+
+        map.data.setStyle(function(feature) {
+            var iconbase = '/static/img/';
+            var type = feature.getProperty('type');
+            if (type == 'district') {
+                switch (feature.getProperty('crisis')) {
+                    case 0 : {
+                        return {
+                            fillColor: "rgb(255, 255, 255)",
+                            strokeColor: "rgb(255, 255, 255)",
+                            strokeWeight: 2
+                        }
+                    }
+               
+                    case 1: {
+                        return {
+                            fillColor: "rgb(233,212,96)",
+                            strokeColor: "rgb(233,212,96)",
+                            strokeWeight: 2
+                        }
+                    }
+                    case 2: {
+                        return {
+                            fillColor: "rgb(242, 120, 75)",
+                            strokeColor: "rgb(242, 120, 75)",
+                            strokeWeight: 2
+                        }
+                    }
+
+                     case 3: {
+                        return {
+                            fillColor: "rgb(211, 84, 0)",
+                            strokeColor: "rgb(211, 84, 0)",
+                            strokeWeight: 2
+                        }
+                    }
+
+                    case 4: {
+                        return {
+                            fillColor: "rgb(246, 36, 89)",
+                            strokeColor: "rgb(246, 36, 89)",
+                            strokeWeight: 2
+                        }
+                    }
+
+                    case 5: {
+                        return {
+                            fillColor: "rgb(207, 0, 15)",
+                            strokeColor: "rgb(207, 0, 15)",
+                            strokeWeight: 2
+                        }
+                    }
+                };
+            }
+        });
+
+        $( "#map" ).delegate('#CrisisButton','click', function() {
+            var district = $( "#CrisisButton" ).val();
+            var selectbuttonname = "#"+district+"Select"
+            var newvalue = $(selectbuttonname).val();
+            var textToDisplay = "Confirm Set Crisis Level of "+ district + " to " + newvalue + "?"
+            var r = confirm(textToDisplay);
+            if (r == true){
+                $.ajax({
+                    url: '/admin/set_crisis',
+                    data: {
+                        district: district,
+                        newcrisis: newvalue
+                    },
+                    dataType: 'json',
+                    method: 'GET',
+                })
+                infowindow.close();
+                map.data.forEach(function(feature) {
+                        map.data.remove(feature);
+                });
+                getDistricts();
+            }  
+        });
+
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
+            document.getElementById('legend'));
+        }
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+
+
+{% endblock content %}

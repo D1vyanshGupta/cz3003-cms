@@ -1,0 +1,24 @@
+<div id="header" class="navbar-collapse">
+  <div id="logo_section">
+     Crisis Management System | {% if 'cms_admin' in request.path %}
+        Admin
+    {% elif 'cms_operator' in request.path %}
+        Operator
+    {% else %}
+        Public
+    {% endif %}
+  </div>
+  {% if 'public' not in request.path %}
+    <a href="{% url 'logout' %}">
+      <div id="logout">
+        Logout
+      </div>
+    </a>
+    {% else %}
+    <a href = "{% url 'login' %}">
+      <div id="login">
+        Login
+      </div>
+    </a>
+  {% endif %}
+</div>

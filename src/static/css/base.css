@@ -1,0 +1,158 @@
+body {
+	margin: 0px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+.navbar-collapse {
+	background: #444;
+	position: fixed;
+	width: 100%;
+	color: white;
+	font-size: 2em;
+	border-color: #e7e7e7;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#logo_section {
+	display: inline-block;
+}
+
+#logout {
+	display: inline-block;
+    float: right;
+    color: #c7c7c7;
+    font-size: 0.6em;
+}
+
+
+#logo_image {
+	max-width: 40px;
+	vertical-align: middle;
+	margin: 15px;
+}
+
+#content{
+	z-index: -1;
+	left: 225px;
+	top: 70px;
+    margin-left: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: calc(100% - 225px);
+    padding: 30px;
+    height: 100%;
+}
+
+#header {
+	height: 70px;
+	line-height: 70px;
+}
+
+.sidebar {
+	position: fixed;
+	top: 70px;
+	width: 225px;
+	padding: 0px;
+    border: none;
+    border-radius: 0;
+    overflow-y: auto;
+    background-color: #222;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    height: 100%;
+}
+
+.sidebar a{
+	text-decoration: none;
+	color: rgb(157,157, 157);
+}
+
+.sidebar ul {
+    padding: 0px;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+.sidebar li {
+	display: inline-block;
+	height:60px;
+	line-height: 60px;
+	font-size: 1.2em;
+	padding-left: 30px;
+	width: 100%;
+	color: rgb(157, 157, 157);
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+}
+
+.sidebar li.active {
+	background: #121212;
+	cursor:default;
+	color:#e7e7e7;
+}
+
+
+.sidebar li:hover:not(active) {
+	background: black;
+	color:white;
+}
+
+.sidebar li:hover a {
+	color:white;
+}
+
+.filters {
+	width: 100%;
+	padding: 15px;
+	margin-bottom: 36px;
+	color: #979797;
+	border-bottom: 1px solid #979797;
+}
+
+.filters-header {
+	width: 100%;
+	cursor: pointer;
+}
+
+.filters-div {
+	margin-top: 15px;
+}
+
+.filters-down-icon {
+	position: absolute;
+	right: 2.5vw;
+}
+
+.filter-categories, .filter-button-div  {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.filter-category {
+	min-height: 100px;
+	max-width: 20%;
+	min-width: 150px;
+	display: inline-block;
+	float: left;
+	border: 1px solid #979797;
+	padding: 10px;
+	color: #676767;
+	border-radius: 4px;
+	margin-right: 20px;
+}
+
+.filter-category li {
+	list-style-type: none;
+	margin-left: -21px;
+}
+
+.filter-button {
+	width: 110px;
+	display: block;
+}
+
+a.fa {
+	text-decoration: none;
+}

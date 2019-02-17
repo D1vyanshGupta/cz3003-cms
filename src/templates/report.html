@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+	<style>
+		ol li{
+			font-size: 200%;
+		}
+		ul li{
+			font-size: 100%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script>
+		var map = document.getElementById("map");
+		var imgBase = '/static/img/';
+		if(window.location.href.indexOf("old") == -1) {
+			$.ajax({
+	            url: '/report/get_map_image',
+	            method:'GET'
+	        }).done(function (reponse) {
+	        	var images = ['crisis_screenshot.png','traffic_screenshot.png','terrorist_screenshot.png','weather_screenshot.png','dengue_screenshot.png'];
+	        	$.each(images, function(){
+				    $('#mapList').append('<li><img src="' + imgBase + this + '" /></li>');
+				});
+	        });
+	     } else {
+	     	$.ajax({
+	     	 }).done(function (reponse) {
+	     	var images = ['crisis_screenshot.png','traffic_screenshot.png','terrorist_screenshot.png','weather_screenshot.png','dengue_screenshot.png'];
+        	$.each(images, function(){
+			    $('#mapList').append('<li><img src="' + imgBase + this + '" /></li>');
+			 });
+			});
+	     }
+	</script>
+	<h1 style="text-align:center;" ><b>Prime Minister Report by CMS</b></h1>
+	<ol>
+		<li id='time'></li>
+		<li id='map'><b>Maps</b>
+			<ul id = "mapList">
+			</ul>
+		</li>
+
+		<li><b>Traffic accidents:</b>
+			<ul>
+				<li id='accidents'></li>
+				<li id='vehicles'></li>
+				<li id='traffic-casualties'></li>
+				<li id='traffic-injuries'></li>
+			</ul>
+		</li>
+		<li><b>Terrorist attacks:</b>
+			<ul>
+				<li id='attacks'></li>
+				<li id='hostiles'></li>
+				<li id='terrorist-casualties'></li>
+				<li id='terrorist-injuries'></li>
+			</ul>
+		</li>
+		<li><b>Crisis level:</b>
+			<ul id = "districts">
+
+			</ul>
+		</li>
+	</ol>
+	<script src="{% static 'js/report.js' %}"></script>
+</body>

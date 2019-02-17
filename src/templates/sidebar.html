@@ -1,0 +1,7 @@
+<div class="nav navbar-nav sidebar col-md-3">
+  <ul>
+    {% for tab in tabs %}
+      <li class="{% if tab.is_active %} active {% endif %} "><a href="/{{ tab.url }}"><i class="fa fa-{{tab.icon}}"></i> {{ tab.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

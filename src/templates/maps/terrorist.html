@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<style>
+
+#content {
+    padding: 0px;
+}
+#map {
+    width: 100%;
+    height: 100vh;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.marker-content {
+    width: 150px;
+}
+
+.filter-option {
+    display:inline-block;
+    margin-right: 20px;
+    padding: 10px;
+    border:1px solid #c7c7c7;
+    border-radius: 4px;
+}
+
+#haze {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    min-width: 100px;
+    height: 160px;
+    padding: 7px;
+    background: rgba(250,250,250,0.8);
+    border-radius: 8px;
+
+}
+
+#haze table {
+    text-align: center;
+}
+
+#haze thead {
+    border-bottom: 1px solid #787878;
+}
+
+#haze tr, #haze th {
+    height: 14.8257%;
+    text-align: center;
+}
+
+#haze td {
+    width: 25%;
+}
+</style>
+</head>
+
+<body>
+
+<div id="map">
+</div>
+<div style="display:none" class="complete" ></div>
+
+<script>
+    var marker;
+
+    function generateInfoWindowHtml(event){
+        var html = '<div class="marker-content"><p>' +
+            '<strong> Reported by: </strong> ' + event['name'] + '<br/>' +
+            '<strong> Description: </strong>' + event['description'] + '<br/>' +
+            '<strong> Operator: </strong>' + event['operator'] + '<br/>' +
+            '</p></div>';
+        return html;
+    }
+
+    function initMap() {
+        var mapDiv = document.getElementById('map');
+        var infowindow =  new google.maps.InfoWindow();
+        var weatherGeoJSON, eventsGeoJSON, dengueGeoJSON;
+
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 1.364922150947930, lng: 103.80912780761719},
+          zoom: 11
+        });
+
+        $.ajax({
+            url: '/get_events_geo_JSON',
+            data: {},
+            dataType: 'json'
+        }).done(function(data, textStatus, jqXHR) {
+            eventsGeoJSON = data['geojson'];
+            map.data.addGeoJson(data['geojson']);   
+            map.data.forEach(function(feature){
+                var type = feature.getProperty('type');
+                if (type == 'traffic') {
+                    map.data.remove(feature);
+                }
+            });
+            $(".complete").attr("id","done");
+        }).fail(function(){
+            console.log('failed'); // some proper failure message
+        });
+        
+
+        map.data.addListener('click', function(event) {
+            var feature = event.feature
+            var iconbase = '/static/img/';
+            var type = feature.getProperty('type');
+            if (type == 'weather') {
+                infowindow.setContent("<div style='width:170px; text-align:center;'><b>"+feature.getProperty('name') + "</b><hr style='margin:3px;'/> <img src='" + iconbase+feature.getProperty('icon')+"' height= 30px width = 30px/>  "+ feature.getProperty('condition_long')+"</div>");
+                infowindow.setPosition(feature.getGeometry().get());
+                infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+                infowindow.open(map);
+            }
+            else if (type == 'dengue') {
+                infowindow.setContent("<div style='width:170px; text-align:center;'><b>"+feature.getProperty('locality') + "</b><hr style='margin:3px;'/> <img src='" + iconbase+'dengue.png'+"' height= 30px width = 30px/>  Cases:"+ feature.getProperty('case_size')+"<br/><a target='__blank'   href='"+feature.getProperty('hyperlink')+ "'>More details<a/></div>");
+                var bounds=new google.maps.LatLngBounds();
+                feature.getGeometry().getArray().forEach(function(path){
+                    path.getArray().forEach(function(path2){
+                        path2.getArray().forEach(function(latLng){
+                            bounds.extend(latLng);
+                            console.log(latLng)
+                        });
+                    });
+                });
+                infowindow.setPosition(bounds.getCenter());
+                infowindow.open(map);
+            }
+            else if (type == 'traffic' || type == 'terrorist'){
+                var html = generateInfoWindowHtml(feature.getProperty('event'));
+                infowindow.setContent(html);
+                infowindow.setPosition(feature.getGeometry().get());
+                infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+                infowindow.open(map);
+            } 
+        });  
+
+        map.data.setStyle(function(feature) {
+            var iconbase = '/static/img/';
+            var type = feature.getProperty('type');
+            if (type == 'weather') {
+              return {
+                icon: {
+                    url:iconbase + feature.getProperty('icon'),
+                    scaledSize: {
+                        width: 30,
+                        height:30
+                    }
+                },
+                title: feature.getProperty('name') + ":" + feature.getProperty('condition_long')
+              };
+            }
+            if (type == 'dengue') {
+                if (feature.getProperty('case_size') <10) {
+                    return {
+                        fillColor: "rgb(241, 196, 15)",
+                        strokeColor: "rgb(243, 156, 18)",
+                        strokeWeight: 2
+                    }
+                }
+                if (feature.getProperty('case_size') < 20) {
+                    return {
+                        fillColor: "rgb(230, 126, 34)",
+                        strokeColor: "rgb(230, 126, 34)",
+                        strokeWeight: 2
+                    }
+                }
+                else {
+                    return {
+                        fillColor: "rgb(192, 57, 43)",
+                        strokeColor: "rgb(192, 57, 43)",
+                        strokeWeight: 2
+                    }
+                }
+            } 
+            else if (type == 'traffic' || type == 'terrorist'){
+                return {
+                    'icon': {
+                        url: iconbase + feature.getProperty('icon'),
+                        scaledSize: {
+                            'width': 30,
+                            'height': 30
+                        }
+                    }
+                };
+            }
+        });
+
+    }
+    $(document).ready(function(){
+        $('#refreshAPI').click(function() {
+             $.ajax({
+                url: '/refreshAPI',
+            }).done (function() {
+                location.reload();
+            })
+        });
+    });
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+
+
+</body>
+</html>

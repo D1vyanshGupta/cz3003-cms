@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login - Crisis Management System</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
+    <script src="{% static "js/backstretch.min.js" %}"></script>
+    <link href="{% static "css/login.css" %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index"><img src="{% static "css/logo.png" %}"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+        <div id="login-wraper">
+            <form class="form login-form" action="" method="post">
+                {% csrf_token %}
+                <legend>Sign in to <span class="blue">CMS</span></legend>
+                <div class="body">
+                  <div>
+                    <label>Username</label>
+                    <input type="text" id="username" name="username">
+                  </div>
+                  <div>
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" style="margin-left:5px">
+                  </div>
+                </div>
+
+                <div class="footer">
+                    <label class="checkbox inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1">Remember me
+                    </label>
+                    <button type="submit" class="btn btn-success" id="login">Login</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <footer class="white navbar-fixed-bottom" style="text-align:center">
+      Crisis Management System - 2016 Team JIALAT CZ3003 - All rights reserved.
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+Identification: 
+<input type="text" placeholder="Identification" name="identification" maxlength="10" required/>
+Name:
+<input type="text" placeholder="Name of person" name="name" maxlength="128" required />
+Contact:
+<input type="tel" placeholder="Contact Number" name="contact" maxlength="8" required />
+
+<textarea placeholder="Description" name="description" rows="3" > {{event.event.description }}</textarea>
+Casualties:
+<input type="number" min="{{ event.event.num_injured }}" placeholder="Casualties" name="numCasualties" value="{{ event.event.num_casualties }}"/>
+Injured:
+<input type="number" min="{{ event.event.num_injured }}" placeholder="Injured" name="numInjured" value="{{ event.event.num_injured }}"/>
+<div class="special-fields">
+	{% if eventtype == 'terrorist' %}
+	<div class="terrorist-fields special-field">
+		Number of hostiles:
+		<input type="number" min="{{ event.num_hostiles }}" value="{{ event.num_hostiles }}" name="numHostiles" />
+	</div>
+	{% elif eventtype == 'traffic' %}
+		<div class="traffic-fields special-field">
+		Number of vehicles:
+		<input type="number" min="{{ event.num_vehicles }}" value="{{ event.num_vehicles }}" name="numVehicles" />
+		</div>
+	{% endif %}
+</div>
+
+
+<input type="hidden" name="eventtype" id="eventtype" value="{{ eventtype }}" />
+<input type="hidden" name="eventid" id="eventid" value="{{ event.id }}" />

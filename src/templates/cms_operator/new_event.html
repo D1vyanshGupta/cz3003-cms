@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<style>
+.event-types {
+	list-style: none;
+	border: 1px solid #c7c7c7;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	padding: 15px;
+}
+.event-types-list {
+	padding: 0px;
+	margin-bottom: 0px;
+}
+
+.event-types-list li {
+	list-style: none;
+	display: inline-block;
+	height: 50px;
+	padding: 15px;
+	border: 1px solid #c7c7c7;
+	border-radius: 4px;
+	margin-right: 10px;
+}
+
+.event-types-list li:hover {
+	border: 1px solid #a7a7a7;
+	cursor: pointer;
+}
+
+.event-types-list li.active {
+	background: #a7a7a7;
+	border: 1px solid #a7a7a7;
+	color: white;
+}
+
+.event-forms {
+	padding: 15px;
+	border: 1px solid #c7c7c7;
+	border-radius: 8px;
+}
+
+
+
+.event-forms input, .event-forms textarea {
+	display: block;
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.event-forms input[type="radio"] {
+	display: inline;
+	margin-left: 8px;
+    width: auto;
+}
+
+#map {
+	width: 100%;
+	height: 400px;
+}
+
+.special-field {
+	display: none;
+}
+
+</style>
+
+<div class="row event-types">
+	<ul class="event-types-list">
+		<li class="event-type active" id="event-traffic" onclick="changeEventType('traffic')"> Traffic Event </li>
+		<li class="event-type" id="event-terrorist" onclick="changeEventType('terrorist')"> Terrorist Event </li>
+	</ul>
+
+</div>
+
+<div class = "row event-forms">
+	<div class="col-md-6">
+		<form action="new" method="post">
+		{% csrf_token %}
+			<input type="text" placeholder="Identification" name="identification" maxlength="10" required />
+			<input type="text" placeholder="Name of person" name="name"  maxlength="128" required/>
+			<input type="text" placeholder="Contact Number" name="contact"  maxlength="8" required/>
+
+			<textarea placeholder="Description" name="description" rows="3" ></textarea>
+			Casulaties:
+			<input type="number" min="0" placeholder="Casualties" name="numCasualties" value="0"/>
+			Injured:
+			<input type="number" min="0" placeholder="Injured" name="numInjured" value="0"/>
+			<div class="special-fields">
+				<div class="terrorist-fields special-field">
+					Number of hostiles:
+					<input type="number" value="0" name="numHostiles" />
+
+					Type of Attack: <br>
+					 <input type="radio" name="attacktype" value="BMB" checked> Bomb
+					 <input type="radio" name="attacktype" value="BCH"> Biochemical
+					 <input type="radio" name="attacktype" value="HST"> Hostage
+				</div>
+				<div class="traffic-fields special-field">
+				Number of vehicles:
+				<input type="number" min="0" value="0" name="numVehicles" />
+				</div>
+			</div>
+			Location: (choose from map) <input id="location" type="text" placeholder="Location" name="location" required />
+
+			<input type="hidden" name="eventtype" id="eventtype" value="traffic" />
+			<button type="submit"  class="btn-primary">Submit </button>
+		</form>
+	</div>
+	<div class="col-md-6">
+		<div id = "map">
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	var marker;
+
+	$('.traffic-fields').show();
+
+	function changeEventType(type){
+		$('.event-type').removeClass('active');
+		$('#event-'+type).addClass('active');
+		$('#eventtype').val(type);
+		$('.special-field').hide();
+		$('.' + type + '-fields').show();
+	}
+
+	function updateLocationChosen(location, map){
+		$('#location').val(location['lat']+','+location['lng']);
+		if (marker){
+			marker.setMap(null);
+		}
+		marker = new google.maps.Marker({
+		    position: location,
+		    map: map,
+		    title: 'Event location'
+		  });
+	}
+
+
+	function initMap() {
+        var mapDiv = document.getElementById('map');
+        // as number of points increase, loading time will increase. hence this is put into an AJAX call. put a loading screen here or something
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 1.364922150947930, lng: 103.80912780761719},
+          zoom: 11
+        });
+   //      if (navigator.geolocation) {
+	  //       navigator.geolocation.getCurrentPosition(function(position) {
+	  //         var pos = {
+	  //           lat: position.coords.latitude,
+	  //           lng: position.coords.longitude,
+	  //           zoom: 12
+	  //         };
+		 //    map.setCenter(pos);
+			// });
+	  //   }
+	    map.addListener('click', function(e){
+	    	var data = {'lat': e.latLng.lat(), 'lng': e.latLng.lng()};
+	    	updateLocationChosen(data, map);
+	    });
+    }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+
+{% endblock %}
