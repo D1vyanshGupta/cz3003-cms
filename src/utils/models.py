@@ -107,7 +107,7 @@ class Event(models.Model):
         Reporter, related_name='first_responder', on_delete=models.CASCADE)
     reporters = models.ManyToManyField(
         Reporter, blank=True, related_name='other_responders')
-    is_active = models.BooleanField(default=True)
+    isactive = models.BooleanField(default=True)
     description = models.TextField(default='')
     num_casualties = models.IntegerField(default=0)
     num_injured = models.IntegerField(default=0)

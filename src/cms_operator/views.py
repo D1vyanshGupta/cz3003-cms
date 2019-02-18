@@ -164,7 +164,7 @@ def new_event(request):
                 return HttpResponseBadRequest('nnok')
             new_event.save()
             AgencyDispatcher(event_log).dispatch()
-            return redirect('/operator/list')
+            return redirect('/cms_operator/list')
         return HttpResponseBadRequest('nok')
 
 

@@ -109,16 +109,16 @@
           zoom: 11
         });
 
-      //   $.ajax({
-    	// 	url: '/utils/get_events_geo_JSON',
-    	// 	data: {},
-    	// 	dataType: 'json'
-    	// }).done(function(data, textStatus, jqXHR) {
-      //       eventsGeoJSON = data['geojson'];
-    	// 	map.data.addGeoJson(data['geojson']);
-    	// }).fail(function(){
-    	// 	console.log('failed'); // some proper failure message
-    	// });
+        $.ajax({
+    		url: '/utils/get_events_geo_JSON',
+    		data: {},
+    		dataType: 'json'
+    	}).done(function(data, textStatus, jqXHR) {
+            eventsGeoJSON = data['geojson'];
+    		map.data.addGeoJson(data['geojson']);
+    	}).fail(function(){
+    		console.log('failed'); // some proper failure message
+    	});
 
 	      $.ajax({
 	              url: '/utils/get_weather_info',
