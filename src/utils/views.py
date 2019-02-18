@@ -211,3 +211,15 @@ def get_event_type(event):
         return 'traffic'
     elif isinstance(event, TerroristEvent):
         return 'terrorist'
+
+def public_map(request):
+    """
+        Display events on the public map
+    """
+    return render(request, 'public.html', {'haze_data': Haze.objects.all()})
+
+def weather_map(request):
+    """
+        Display events on the public map
+    """
+    return render(request, 'maps/weather.html', {'haze_data': Haze.objects.all()})

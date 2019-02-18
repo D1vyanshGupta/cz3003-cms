@@ -1,3 +1,4 @@
+{% if 'public' not in request.path %}
 <div class="nav navbar-nav sidebar col-md-3">
   <ul>
     {% for tab in tabs %}
@@ -5,3 +6,4 @@
     {% endfor %}
   </ul>
 </div>
+{% endif %}

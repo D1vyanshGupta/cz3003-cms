@@ -15,10 +15,10 @@ urlpatterns = [
     path('refreshAPI', refreshAPI),
     path('get_district_info', get_district_info),
     path('get_events_geo_JSON', get_events_geo_JSON),
-    path('maps/weather', TemplateView.as_view(template_name='maps/weather.html'), name='weather_map'),
+    path('maps/weather', weather_map, name='weather_map'),
     path('maps/dengue', TemplateView.as_view(template_name='maps/dengue.html'), name='dengue_map'),
     path('maps/terrorist', TemplateView.as_view(template_name='maps/terrorist.html'), name='terrorist_map'),
     path('maps/traffic', TemplateView.as_view(template_name='maps/traffic.html'), name='traffic_map'),
     path('maps/crisis', TemplateView.as_view(template_name='maps/crisis.html'), name='crisis_map'),
-    path('', RedirectView.as_view(url='public'), name='public')
+    path('public', public_map, name='public')
     ]

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
   <head>
     <title>Weather Map</title>
@@ -7,6 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 <style>
 
 #content {
@@ -68,6 +72,25 @@ body {
 <body>
 
 <div id="map">
+</div>
+<div id="haze">
+  <table>
+    <thead>
+      <th> </th>
+      <th> PSI </th>
+      <th> PM10 </th>
+      <th> PM2.5 </th>
+    </thead>
+    {% for haze in haze_data %}
+    <tr>
+      <td> {{ haze.region_name }} </td>
+      <td> {{ haze.psi }} </td>
+      <td> {{ haze.pm_10 }}</td>
+      <td> {{ haze.pm_25 }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
 </div>
 <div style="display:none" class="complete" ></div>
 

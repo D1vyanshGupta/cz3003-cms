@@ -20,7 +20,7 @@
 
 	<script>
 		var map = document.getElementById("map");
-		var imgBase = '/static/img/';
+		var imgBase = '/static/img/report/';
 		if(window.location.href.indexOf("old") == -1) {
 			$.ajax({
 	            url: '/pmo_report/get_map_image',
@@ -28,7 +28,7 @@
 	        }).done(function (reponse) {
 	        	var images = ['crisis_screenshot.png','traffic_screenshot.png','terrorist_screenshot.png','weather_screenshot.png','dengue_screenshot.png'];
 	        	$.each(images, function(){
-				    $('#mapList').append('<li><img src="' + imgBase + this + '" /></li>');
+				    $('#mapList').append('<li><img src="' + imgBase + this + '" width="50%" height="50%"/></li>');
 				});
 	        });
 	     } else {

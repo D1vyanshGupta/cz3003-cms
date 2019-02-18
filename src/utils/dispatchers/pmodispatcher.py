@@ -37,7 +37,8 @@ class PMODispatcher:
         """
             Generate PDF from html
         """
-        pdfkit.from_url('http://127.0.0.1:8000/utils/report', 'report.pdf')
+        options = {'javascript-delay':'5000'}
+        pdfkit.from_url('http://127.0.0.1:8000/utils/report', 'report.pdf', options=options)
 
     def generate_old_PDF(self):
         """
