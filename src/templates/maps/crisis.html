@@ -97,12 +97,12 @@ body {
 
         var getDistricts = function() {
             $.ajax({
-                url: '/admin/get_districts',
+                url: '/cms_admin/get_districts',
                 dataType: 'json'
             }).done(function (data) {
                  map.data.addGeoJson(data);
                   $(".complete").attr("id","done");
-            });  
+            });
         };
 
         getDistricts();
@@ -120,7 +120,7 @@ body {
                 infowindow.setPosition(new google.maps.LatLng(feature.getProperty('center')[0],feature.getProperty('center')[1]));
                 infowindow.open(map);
             }
-        });  
+        });
 
         map.data.setStyle(function(feature) {
             var iconbase = '/static/img/';
@@ -134,7 +134,7 @@ body {
                             strokeWeight: 2
                         }
                     }
-               
+
                     case 1: {
                         return {
                             fillColor: "rgb(233,212,96)",
@@ -177,12 +177,12 @@ body {
             }
         });
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
-            document.getElementById('legend'));        
+            document.getElementById('legend'));
     }
     $(document).ready(function(){
         $('#refreshAPI').click(function() {
              $.ajax({
-                url: '/refreshAPI',
+                url: '/utils/refreshAPI',
             }).done (function() {
                 location.reload();
             })
@@ -191,8 +191,7 @@ body {
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
+{% include 'maps_api.html' %}
 
 
 </body>

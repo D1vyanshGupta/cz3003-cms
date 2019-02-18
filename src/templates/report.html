@@ -23,7 +23,7 @@
 		var imgBase = '/static/img/';
 		if(window.location.href.indexOf("old") == -1) {
 			$.ajax({
-	            url: '/report/get_map_image',
+	            url: '/pmo_report/get_map_image',
 	            method:'GET'
 	        }).done(function (reponse) {
 	        	var images = ['crisis_screenshot.png','traffic_screenshot.png','terrorist_screenshot.png','weather_screenshot.png','dengue_screenshot.png'];

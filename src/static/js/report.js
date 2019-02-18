@@ -47,7 +47,7 @@ function displayTerrorist(data){
 	terroristLocations.innerHTML = locationString;
 
 	var typeString = "Types of attacks: ";
-	var types = data['attackTypes']; 
+	var types = data['attackTypes'];
 	for(var i = 0;i < types.length; i++){
 		typeString += types[i];
 		typeString += ", ";
@@ -57,19 +57,19 @@ function displayTerrorist(data){
 
 function displayCrisis(data){
 	$.each(data, function(key,value){
-		$('#districts').append('<li>' + key +': ' + value+'</li>'); 
+		$('#districts').append('<li>' + key +': ' + value+'</li>');
 	});
 }
 
 $.ajax( {
-	url: 'get_crisis_info',
+	url: '/pmo_report/get_crisis_info',
 	dataType: 'json'
 }).done(function (data) {
 	displayCrisis(data);
 });
 
 $.ajax({
-	url: 'get_traffic_info',
+	url: '/pmo_report/get_traffic_info',
 	data: {},
 	dataType: 'json'
 }).done(function (data) {
@@ -77,7 +77,7 @@ $.ajax({
 });
 
 $.ajax({
-	url: 'get_terrorist_info',
+	url: '/pmo_report/get_terrorist_info',
 	data: {},
 	dataType: 'json'
 }).done(function (data) {

@@ -94,7 +94,7 @@ body {
         });
 
         $.ajax({
-                url: '/get_dengue_info',
+                url: '/utils/get_dengue_info',
                 dataType: 'json'
             }).done(function (data) {
                 dengueGeoJSON = data;
@@ -132,8 +132,8 @@ body {
                 infowindow.setPosition(feature.getGeometry().get());
                 infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
                 infowindow.open(map);
-            } 
-        });  
+            }
+        });
 
         map.data.setStyle(function(feature) {
             var iconbase = '/static/img/';
@@ -172,7 +172,7 @@ body {
                         strokeWeight: 2
                     }
                 }
-            } 
+            }
             else if (type == 'traffic' || type == 'terrorist'){
                 return {
                     'icon': {
@@ -190,7 +190,7 @@ body {
     $(document).ready(function(){
         $('#refreshAPI').click(function() {
              $.ajax({
-                url: '/refreshAPI',
+                url: 'utils/refreshAPI',
             }).done (function() {
                 location.reload();
             })
@@ -199,8 +199,7 @@ body {
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
+{% include 'maps_api.html' %}
 
 
 </body>

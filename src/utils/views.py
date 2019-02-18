@@ -110,12 +110,12 @@ def login_view(request):
         return HttpResponse("Invalid login")
 
 
-def logout_view(request):
-    """
-        Process log out action and redirect to login page
-    """
-    logout(request)
-    return redirect('/login')
+# def logout_view(request):
+#     """
+#         Process log out action and redirect to login page
+#     """
+#     logout(request)
+#     return redirect('/login')
 
 
 def get_weather_info(request):

@@ -63,10 +63,6 @@ class DengueAPI:
             Update dengue information into the database
         """
         geojson_file_path = os.path.join(file_directory, 'dengue-clusters-geojson.geojson')
-        # shp_file_path = os.path.join(file_directory, 'DENGUE_CLUSTER.shp')
-        # command_to_convert_to_shp = 'ogr2ogr -f "ESRI Shapefile" {} "{}"'.format(shp_file_path, geojson_file_path)
-        # os.system(command_to_convert_to_shp)
-        # command_to_run = "shp2pgsql -s 3414 -d -W LATIN1 %s cms_dengue | psql -d cms" % shp_file_path
         command_to_run = 'ogr2ogr -f "PostgreSQL" PG:"dbname=cms user=divyanshgupta" "{}" -nln cms_dengue -append'.format(geojson_file_path)
         os.system(command_to_run)
 

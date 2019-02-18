@@ -60,14 +60,14 @@
           center: {lat: 1.364922150947930, lng: 103.80912780761719},
           zoom: 11
         });
-        
+
         var getDistricts = function() {
             $.ajax({
-                url: '/admin/get_districts',
+                url: '/cms_admin/get_districts',
                 dataType: 'json'
             }).done(function (data) {
                  map.data.addGeoJson(data);
-            });  
+            });
         };
 
         getDistricts();
@@ -85,7 +85,7 @@
                 infowindow.setPosition(new google.maps.LatLng(feature.getProperty('center')[0],feature.getProperty('center')[1]));
                 infowindow.open(map);
             }
-        });  
+        });
 
         map.data.setStyle(function(feature) {
             var iconbase = '/static/img/';
@@ -99,7 +99,7 @@
                             strokeWeight: 2
                         }
                     }
-               
+
                     case 1: {
                         return {
                             fillColor: "rgb(233,212,96)",
@@ -150,7 +150,7 @@
             var r = confirm(textToDisplay);
             if (r == true){
                 $.ajax({
-                    url: '/admin/set_crisis',
+                    url: '/cms_admin/set_crisis',
                     data: {
                         district: district,
                         newcrisis: newvalue
@@ -163,7 +163,7 @@
                         map.data.remove(feature);
                 });
                 getDistricts();
-            }  
+            }
         });
 
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
@@ -173,8 +173,8 @@
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdsOKjIwnD16rVjw8MsOoEMkVo8BzHWeI&callback=initMap"
+type="text/javascript"></script>
 
 
 {% endblock content %}

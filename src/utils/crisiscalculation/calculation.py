@@ -69,12 +69,12 @@ class CrisisCalculator:
                                   for event in self.get_events(singapore_obj.geom)])
             print(singapore_obj.name_1, total_severity)
             crisis_level = self.get_crisis_level(total_severity)
-            district = Districts.objects.get(district=singapore_obj.name_1)
+            district = District.objects.get(district=singapore_obj.name_1)
             crises[district.district] = crisis_level
             if district.crisis >= crisis_level:
                 continue
             else:
                 new_crises[district.district] = crisis_level
                 # district.crisis = crisis_level
-        PMODispatcher().emergency_dispatch(new_crises)
+        # PMODispatcher().emergency_dispatch(new_crises)
         return crises

@@ -13,7 +13,7 @@ class PMODispatcher:
     """
         Generates PDF report and constructs email message to send to PMO using email API
     """
-    PMO_EMAIL = 'cz3003cms@leeching.net'
+    PMO_EMAIL = 'DIVYANSH002@e.ntu.edu.sg'
 
     def get_email_content(self):
         """
@@ -37,13 +37,13 @@ class PMODispatcher:
         """
             Generate PDF from html
         """
-        pdfkit.from_url('http://localhost:8000/report', 'report.pdf')
+        pdfkit.from_url('http://127.0.0.1:8000/utils/report', 'report.pdf')
 
     def generate_old_PDF(self):
         """
             Generate PDF from html using old screenshots
         """
-        pdfkit.from_url('http://localhost:8000/report/?old=1', 'report.pdf')
+        pdfkit.from_url('http://127.0.0.1:8000/utils/report/?old=1', 'report.pdf')
 
     def dispatch(self, shouldGenerate):
         """

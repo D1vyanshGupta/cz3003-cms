@@ -1,14 +1,19 @@
 """
     Module to generate the report to send to the PMO
 """
+import os
+import time
+import shutil
+import requests
+
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
-from utils.models import TrafficEvent, TerroristEvent, District
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-import requests
+
+from utils.models import TrafficEvent, TerroristEvent, District
 
 
 def get_traffic_info(request):
@@ -62,7 +67,7 @@ def get_crisis_info(request):
     """
         Get the crisis information for each region
     """
-    districts = Districts.objects.all()
+    districts = District.objects.all()
     response = {}
     for d in districts:
         response[d.district] = d.crisis
@@ -73,24 +78,45 @@ def get_map_image(request):
     """
         Get the image of Google Map
     """
+    screenshot_dir_path = os.path.join(os.getcwd(), 'static', 'img', 'report')
+
+    if os.path.isdir(screenshot_dir_path):
+        shutil.rmtree(screenshot_dir_path)
+
+    os.makedirs(screenshot_dir_path)
+
     try:
+        browser = webdriver.Chrome("/usr/local/bin/chromedriver")
+
         print('capturing screenshots')
-        browser = webdriver.Firefox()
-        browser.get('http://localhost:8000/maps/crisis')
+
+        browser.get('http://127.0.0.1:8000/utils/maps/crisis')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
-        browser.save_screenshot('cms/static/img/crisis_screenshot.png')
-        browser.get('http://localhost:8000/maps/traffic')
+        browser.save_screenshot(os.path.join(screenshot_dir_path, 'crisis_screenshot.png'))
+        print('crisis done')
+
+        browser.get('http://127.0.0.1:8000/utils/maps/traffic')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
-        browser.save_screenshot('cms/static/img/traffic_screenshot.png')
-        browser.get('http://localhost:8000/maps/terrorist')
+        browser.save_screenshot(os.path.join(screenshot_dir_path, 'traffic_screenshot.png'))
+        print('traffic done')
+
+        browser.get('http://127.0.0.1:8000/utils/maps/terrorist')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
-        browser.save_screenshot('cms/static/img/terrorist_screenshot.png')
-        browser.get('http://localhost:8000/maps/weather')
+        browser.save_screenshot(os.path.join(screenshot_dir_path, 'terrorist_screenshot.png'))
+        print('terrorist done')
+
+        browser.get('http://127.0.0.1:8000/utils/maps/weather')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
-        browser.save_screenshot('cms/static/img/weather_screenshot.png')
-        browser.get('http://localhost:8000/maps/dengue')
+        browser.save_screenshot(os.path.join(screenshot_dir_path, 'weather_screenshot.png'))
+        print('weather done')
+
+        browser.get('http://127.0.0.1:8000/utils/maps/dengue')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
-        browser.save_screenshot('cms/static/img/dengue_screenshot.png')
+        browser.save_screenshot(os.path.join(screenshot_dir_path, 'dengue_screenshot.png'))
+        print('dengue done')
+
         browser.quit()
+    except Exception as e:
+        print(e)
     finally:
         return HttpResponse('done')

@@ -94,12 +94,12 @@ body {
         });
 
         $.ajax({
-            url: '/get_events_geo_JSON',
+            url: '/utils/get_events_geo_JSON',
             data: {},
             dataType: 'json'
         }).done(function(data, textStatus, jqXHR) {
             eventsGeoJSON = data['geojson'];
-            map.data.addGeoJson(data['geojson']);   
+            map.data.addGeoJson(data['geojson']);
             map.data.forEach(function(feature){
                 var type = feature.getProperty('type');
                 if (type == 'traffic') {
@@ -110,7 +110,7 @@ body {
         }).fail(function(){
             console.log('failed'); // some proper failure message
         });
-        
+
 
         map.data.addListener('click', function(event) {
             var feature = event.feature
@@ -142,8 +142,8 @@ body {
                 infowindow.setPosition(feature.getGeometry().get());
                 infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
                 infowindow.open(map);
-            } 
-        });  
+            }
+        });
 
         map.data.setStyle(function(feature) {
             var iconbase = '/static/img/';
@@ -182,7 +182,7 @@ body {
                         strokeWeight: 2
                     }
                 }
-            } 
+            }
             else if (type == 'traffic' || type == 'terrorist'){
                 return {
                     'icon': {
@@ -200,7 +200,7 @@ body {
     $(document).ready(function(){
         $('#refreshAPI').click(function() {
              $.ajax({
-                url: '/refreshAPI',
+                url: '/utils/refreshAPI',
             }).done (function() {
                 location.reload();
             })
@@ -209,8 +209,7 @@ body {
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
+{% include 'maps_api.html' %}
 
 
 </body>

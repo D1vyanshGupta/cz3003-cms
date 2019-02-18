@@ -8,8 +8,6 @@ from .views import *
 
 urlpatterns = [
     path('login_view', login_view, name='login_view'),
-    # url('login', TemplateView.as_view(template_name='login.html')),
-    # url('^logout', views.logout_view),
     path('index', TemplateView.as_view(template_name='index.html'), name='index'),
     path('report/', TemplateView.as_view(template_name='report.html'), name='report'),
     path('get_weather_info', get_weather_info),

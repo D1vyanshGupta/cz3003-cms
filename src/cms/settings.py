@@ -181,7 +181,7 @@ SERIALIZATION_MODULES = {
     "geojson": "django.contrib.gis.serializers.geojson",
 }
 
-LOGIN_URL = '/login'
+LOGIN_URL = '/accounts/login'
 
 EMAIL_HOST = 'localhost'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
