@@ -6,12 +6,13 @@ from ..models import TrafficEvent, TerroristEvent
 import requests
 
 AGENCIES = {
-    'SAF': '+6587198478',
-    'SCDF': '+6597741853'
+    # 'SAF': '+6587198478',
+    # 'SCDF': '+6597741853'
+    'SAF': '+6583445307',
+    'SCDF': '+6583445307'
 }
 
 import geocoder
-
 
 class AgencyDispatcher:
 
