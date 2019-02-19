@@ -77,7 +77,7 @@
         <thead>
             <th> </th> <th> PSI </th> <th> PM10 </th> <th> PM2.5 </th>
         </thead>
-        {% for haze in context.haze %}
+        {% for haze in data.haze %}
             <tr>
                 <td> {{ haze.region_name }} </td> <td> {{ haze.psi }} </td>   <td> {{ haze.pm_10 }}</td> <td> {{ haze.pm_25 }}</td>
             </tr>

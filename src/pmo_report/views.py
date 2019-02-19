@@ -88,32 +88,25 @@ def get_map_image(request):
     try:
         browser = webdriver.Chrome("/usr/local/bin/chromedriver")
 
-        print('capturing screenshots')
-
         browser.get('http://127.0.0.1:8000/utils/maps/crisis')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
         browser.save_screenshot(os.path.join(screenshot_dir_path, 'crisis_screenshot.png'))
-        print('crisis done')
 
         browser.get('http://127.0.0.1:8000/utils/maps/traffic')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
         browser.save_screenshot(os.path.join(screenshot_dir_path, 'traffic_screenshot.png'))
-        print('traffic done')
 
         browser.get('http://127.0.0.1:8000/utils/maps/terrorist')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
         browser.save_screenshot(os.path.join(screenshot_dir_path, 'terrorist_screenshot.png'))
-        print('terrorist done')
 
         browser.get('http://127.0.0.1:8000/utils/maps/weather')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
         browser.save_screenshot(os.path.join(screenshot_dir_path, 'weather_screenshot.png'))
-        print('weather done')
 
         browser.get('http://127.0.0.1:8000/utils/maps/dengue')
         element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "done")))
         browser.save_screenshot(os.path.join(screenshot_dir_path, 'dengue_screenshot.png'))
-        print('dengue done')
 
         browser.quit()
     except Exception as e:

@@ -37,8 +37,7 @@ class PMODispatcher:
         """
             Generate PDF from html
         """
-        options = {'javascript-delay':'5000'}
-        pdfkit.from_url('http://127.0.0.1:8000/utils/report', 'report.pdf', options=options)
+        pdfkit.from_url('http://127.0.0.1:8000/utils/report', 'report.pdf')
 
     def generate_old_PDF(self):
         """
@@ -50,7 +49,7 @@ class PMODispatcher:
         """
             Dispatch email to PMO using email API
         """
-        if ((shouldGenerate == True) or (not os.path.isfile('report.pdf')) ):
+        if ((shouldGenerate == True) or (not os.path.isfile('report.pdf'))):
             self.generate_PDF()
         else:
             self.generate_old_PDF()
