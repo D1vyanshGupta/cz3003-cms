@@ -19,10 +19,7 @@ class PMODispatcher:
         """
             Return email message content
         """
-        return 'To PMO, \
-            Please find attached the half hourly report update with this email. \
-            \
-            Sincerely, CZ3003 CMS'
+        return 'To PMO,\n\nPlease find attached the half hourly report update with this email.\n\nSincerely, CZ3003 CMS'
 
     def get_emergency_email_content(self, crisis_dic):
         crisis_string = ', '.join(
