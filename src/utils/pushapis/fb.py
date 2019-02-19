@@ -9,11 +9,10 @@ class FacebookAPI:
 
     def push_update(self, message):
         try:
-            page_id = "197027533999861"
-            page_access_token = "CAAYtJqL3ZAO8BAA0hzU5NNlNUxZCEgVXubfWTl4oxOgb5IaR9GhKq4DGMHWbFvvfXMLihMd3S8VAPCOtLOsRxX8sg5rAxAcML7aEQyC5r38l7ZCDPSJqRULIxA6lnR6eZBgZCbPZCQo1Nw3MzaJN1KO8s3SfVeGZBAKVUJPFBNNwcfek8PgiHEhg71T8facNmwZD"
+            page_id = '805386113142326'
+            page_access_token = 'EAAIQxUVl6hYBAD5uZBujwUGuRAqzSRpxe9nBD86xGakdRLrCmZBtbTKpW3O63OXPwomJKVcaqyAk1sVpjGOpOr6hK2IDtXDbLsqa0c5F0SwPK1dr0JHZANUWpIZC78aakmibI6mZAWcyZCncTTDAFLlyFi5sZACV1JqiPCL3G8f4VhTrvkD40JDVGhDZCllSzNv7q0r67phJ9Ru3VZCMbfGBM'
             graph = facebook.GraphAPI(page_access_token)
-            attachment = {}
-            graph.put_wall_post(message, attachment=attachment)
+            graph.put_object(parent_object='805386113142326', connection_name='feed', message=message)
             return True
         except Exception as e:
             print (e)
