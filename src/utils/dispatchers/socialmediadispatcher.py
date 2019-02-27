@@ -30,7 +30,7 @@ class SocialMediaDispatcher:
         try:
             message = self.construct_message()
             # FacebookAPI().push_update(message)
-            TwitterAPI().push_update(message)
+            # TwitterAPI().push_update(message)
             return True
         except:
             return False

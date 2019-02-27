@@ -10,7 +10,7 @@ class FacebookAPI:
     def push_update(self, message):
         try:
             page_id = '805386113142326'
-            page_access_token = 'EAAIQxUVl6hYBAD5uZBujwUGuRAqzSRpxe9nBD86xGakdRLrCmZBtbTKpW3O63OXPwomJKVcaqyAk1sVpjGOpOr6hK2IDtXDbLsqa0c5F0SwPK1dr0JHZANUWpIZC78aakmibI6mZAWcyZCncTTDAFLlyFi5sZACV1JqiPCL3G8f4VhTrvkD40JDVGhDZCllSzNv7q0r67phJ9Ru3VZCMbfGBM'
+            page_access_token = 'EAAIQxUVl6hYBAHciCx0h9u4IRmMAoUGWvvNZAYoOlxTD2h2vRauCSItlpN9D2YI7Qh99rFtbTAHFWUgmoNnxrNmiBPqbuhNul4tfhi5NZA3sJCL6yTd6jABJd4g9ss0HSZBdZCM1FRmKfDuVZCOZCdoNLZBEmbEWAZCn6ZBX1XEooPpnY9TDXVbIA7WA2JkZC0HJIZD'
             graph = facebook.GraphAPI(page_access_token)
             graph.put_object(parent_object='805386113142326', connection_name='feed', message=message)
             return True

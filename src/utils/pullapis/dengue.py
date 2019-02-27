@@ -63,7 +63,7 @@ class DengueAPI:
             Update dengue information into the database
         """
         geojson_file_path = os.path.join(file_directory, 'dengue-clusters-geojson.geojson')
-        command_to_run = 'ogr2ogr -f "PostgreSQL" PG:"dbname=cms user=divyanshgupta" "{}" -nln cms_dengue -append'.format(geojson_file_path)
+        command_to_run = 'ogr2ogr -f "PostgreSQL" PG:"dbname=cms user=hungpham" "{}" -nln cms_dengue -append'.format(geojson_file_path)
         os.system(command_to_run)
 
     def pull_update(self):

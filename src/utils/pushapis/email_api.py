@@ -10,7 +10,7 @@ class EmailAPI:
     def push_update(self, to_email, subject, content, attachment=None):
         try:
             email = EmailMessage(
-                subject, content, 'divyanshguptarocking@gmail.com', [to_email])
+                subject, content, 'hungph2202@gmail.com', [to_email])
             if attachment:
                 email.attach_file(attachment)
             email.send()
