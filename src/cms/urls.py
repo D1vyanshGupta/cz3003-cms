@@ -26,5 +26,5 @@ urlpatterns = [
     path('cms_operator/', include('cms_operator.urls')),
     path('pmo_report/', include('pmo_report.urls')),
     path('public_info/', include('public_info.urls')),
-    path('login/', RedirectView.as_view(url='accounts/login')),
+    path('login/', RedirectView.as_view(url='/accounts/login')),
     ]

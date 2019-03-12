@@ -24,17 +24,17 @@ Sources:
   - 'National Environment Agency'
 License: 'https://data.gov.sg/open-data-licence'
 Frequency: 'Daily'
-Last Updated: '2019-02-21T00:05:18.364779'
+Last Updated: '2019-03-12T00:09:23.541300'
 Resources:
   -
     Identifier: '801ce5ce-fb99-4211-94fe-9d8ca5e182d4'
     Title: 'Dengue Clusters (KML)'
-    Url: 'https://geo.data.gov.sg/dengue-cluster/2019/02/19/kml/dengue-cluster.kml'
+    Url: 'https://geo.data.gov.sg/dengue-cluster/2019/03/08/kml/dengue-cluster.kml'
     Format: 'KML'
-    Last Updated: '2019-02-18T16:00:00'
+    Last Updated: '2019-03-07T16:00:00'
   -
     Identifier: '8af18201-f3b0-4a9c-924e-f0bd8dda7bf6'
     Title: 'Dengue Clusters (GEOJSON)'
-    Url: 'https://geo.data.gov.sg/dengue-cluster/2019/02/19/geojson/dengue-cluster.geojson'
+    Url: 'https://geo.data.gov.sg/dengue-cluster/2019/03/08/geojson/dengue-cluster.geojson'
     Format: 'GeoJSON'
-    Last Updated: '2019-02-18T16:00:00'
+    Last Updated: '2019-03-07T16:00:00'
