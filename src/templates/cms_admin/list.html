@@ -93,38 +93,38 @@
 </style>
 
 <div class="row events-container traffic-events" id = 'trafficList'>
-	<span class="table-label"> Traffic events:</span>
+	<span class="table-label"> Traffic Incidents:</span>
 	<table class="events-table">
 		<thead>
 			<tr>
-				<th> Name </th> 
-				<th> Contact Number </th> 
-				<th> Description </th> 
-				<th> Details </th> 
+				<th> Name </th>
+				<th> Contact Number </th>
+				<th> Description </th>
+				<th> Details </th>
 				<th> </th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for event in data.trafficevents %}
 				<tr class="{% if not event.event.isactive %}inactive-row{% endif %}">
-					<td> 
-						{{ event.event.first_responder.name }} (*) 
+					<td>
+						{{ event.event.first_responder.name }} (*)
 							{% for person in event.event.reporters.all %}
 								<br> {{person.name}}
 							{% endfor %}
-					</td> 
-					<td> 
+					</td>
+					<td>
 							{{ event.event.first_responder.contact_number }}
 							{% for person in event.event.reporters.all %}
 								<br> {{person.contact_number}}
 							{% endfor %}
-					</td> 
-					<td> <p class="truncate">  {{ event.event.description}} </p> </td> 
-					<td> 
-						<img src="{% static 'img/dead.png' %}" class="details-img"/>{{ event.event.num_casualties}} 
+					</td>
+					<td> <p class="truncate">  {{ event.event.description}} </p> </td>
+					<td>
+						<img src="{% static 'img/dead.png' %}" class="details-img"/>{{ event.event.num_casualties}}
 						<img src="{% static 'img/injury.png' %}" class="details-img"/>{{event.event.num_injured}}
 						<img src="{% static 'img/caraccident.png' %}" class="details-img"/>{{event.num_vehicles}}
-					</td> 
+					</td>
 					<td> <i class="fa fa-remove fa-2x edit-controls" style="color:#D91E18" onclick="deleteEvent({{event.id}}, 'traffic')"></i> </td>
 				</tr>
 			{% endfor %}
@@ -134,38 +134,38 @@
 
 
 <div class="row events-container terrorist-events" id = 'terroristList'>
-	<span class="table-label"> Terrorist events: </span>
+	<span class="table-label"> Terrorist Incidents: </span>
 	<table class="events-table">
 		<thead>
 			<tr>
-				<th> Name </th> 
-				<th> Contact Number </th> 
-				<th>  <p class="truncate"> Description  </p></th> 
-				<th> Details </th> 
+				<th> Name </th>
+				<th> Contact Number </th>
+				<th>  <p class="truncate"> Description  </p></th>
+				<th> Details </th>
 				<th> </th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for event in data.terroristevents %}
 				<tr class="{% if not event.event.isactive %}inactive-row{% endif %}">
-					<td> 
-						{{ event.event.first_responder.name }} (*) 
+					<td>
+						{{ event.event.first_responder.name }} (*)
 							{% for person in event.event.reporters.all %}
 								<br> {{person.name}}
 							{% endfor %}
-					</td> 
-					<td> 
+					</td>
+					<td>
 							{{ event.event.first_responder.contact_number }}
 							{% for person in event.event.reporters.all %}
 								<br> {{person.contact_number}}
 							{% endfor %}
-					</td> 
-					<td> <p class="truncate">  {{ event.event.description}} </p> </td> 
-					<td> 
-						<img src="{% static 'img/dead.png' %}" class="details-img"/> {{ event.event.num_casualties}} 
+					</td>
+					<td> <p class="truncate">  {{ event.event.description}} </p> </td>
+					<td>
+						<img src="{% static 'img/dead.png' %}" class="details-img"/> {{ event.event.num_casualties}}
 						<img src="{% static 'img/injury.png' %}" class="details-img"/> {{event.event.num_injured}}
 						<img src="{% static 'img/terrorist.png' %}" class="details-img"/> {{event.num_hostiles}}
-					</td> 
+					</td>
 					<td> <i class="fa fa-remove fa-2x edit-controls" style="color:#D91E18"  onclick="deleteEvent({{event.id}}, 'terrorist')"></i> </td>
 				</tr>
 			{% endfor %}
@@ -181,7 +181,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Update Event</h4>
 			</div>
-			
+
 				{% csrf_token %}
 				<div class="modal-body event-forms">
 

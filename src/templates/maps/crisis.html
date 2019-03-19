@@ -97,17 +97,18 @@ body {
 
         var getDistricts = function() {
             $.ajax({
-                url: '/cms_admin/get_districts',
+                url: '/utils/get_district_info',
                 dataType: 'json'
             }).done(function (data) {
                  map.data.addGeoJson(data);
-                  $(".complete").attr("id","done");
-            });
+            }).fail(function(){console.log('failed')});
         };
 
+        console.log('before getDistricts');
         getDistricts();
+        console.log('after getDistricts');
 
-        var crisisSetterForm
+        var crisisSetterForm;
 
         map.data.addListener('click', function(event) {
             var feature = event.feature
@@ -179,6 +180,7 @@ body {
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
             document.getElementById('legend'));
     }
+    
     $(document).ready(function(){
         $('#refreshAPI').click(function() {
              $.ajax({
@@ -192,7 +194,6 @@ body {
 </script>
 
 {% include 'maps_api.html' %}
-
 
 </body>
 </html>
