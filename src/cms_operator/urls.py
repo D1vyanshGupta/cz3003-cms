@@ -11,5 +11,6 @@ urlpatterns = [
     path('map', map_events),
     path('update_event', update_event),
     path('deactivate_event', deactivate_event),
+	path('activate_event', activate_event),
     path('get_event_update_form', get_event_update_form),
 ]
