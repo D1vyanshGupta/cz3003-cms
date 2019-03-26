@@ -58,16 +58,16 @@ class AdminReport(TabView):
     icon = 'file-text'
 
 
-class AdminSuggestedCrisis(TabView):
-
-    """
-        View for admin to view suggested crisis levels by our system
-    """
-    tab_id = 'calculator'
-    url = 'cms_admin/suggested_crisis'
-    template = 'cms_admin/crisiscalculator.html'
-    title = 'Crisis Calculator'
-    icon = 'calculator'
+# class AdminSuggestedCrisis(TabView):
+#
+#     """
+#         View for admin to view suggested crisis levels by our system
+#     """
+#     tab_id = 'calculator'
+#     url = 'cms_admin/suggested_crisis'
+#     template = 'cms_admin/crisiscalculator.html'
+#     title = 'Crisis Calculator'
+#     icon = 'calculator'
 
 
 class AdminTabViews(TabViews):
@@ -78,4 +78,4 @@ class AdminTabViews(TabViews):
 
     def __init__(self):
         self.tabs = [
-            AdminLogView(), AdminCrisisView(), AdminMapView(), AdminListEvents(), AdminReport(), AdminSuggestedCrisis()]
+            AdminLogView(), AdminCrisisView(), AdminMapView(), AdminListEvents(), AdminReport()]

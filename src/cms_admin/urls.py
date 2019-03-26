@@ -14,5 +14,5 @@ urlpatterns = [
     path('report', report_manager),
     path('delete_event', delete_event),
     path('send_report', send_report),
-    path('suggested_crisis', crisis_calculator)
+    # path('suggested_crisis', crisis_calculator)
 ]

@@ -102,7 +102,7 @@ def update_event(request):
             desc=','.join(edit_string))
         event_log.save()
         AgencyDispatcher(event_log).dispatch()  # dispatch to agencies
-        return redirect('/operator/list')
+        return redirect('/cms_operator/list')
     else:
         return HttpResponseBadRequest()
 
@@ -220,7 +220,7 @@ def get_event_update_form(request):
         context['event'] = TerroristEvent.objects.get(id=event_id)
     else:
         return HttpResponseBadRequest()
-    return render(request, 'operator/updateEventForm.html', context)
+    return render(request, 'cms_operator/updateEventForm.html', context)
 
 
 def get_events(request):

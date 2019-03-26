@@ -31,7 +31,7 @@ def get_transaction_log(request):
         'crisisLogDatabase': CrisisTransactionLog.objects.all(),
     })
 
-
+@login_required
 def get_crisis_view(request):
     """
         Set crisis manager as active tab
@@ -40,9 +40,9 @@ def get_crisis_view(request):
         return HttpResponseForbidden()
     tabs = AdminTabViews()
     tabs.set_active_tab('crisis')
-    return render_tab_view(request, tabs, {
-    })
-
+    crises = CrisisCalculator().check_crisis()
+    print(crises)
+    return render_tab_view(request, tabs, data={'crises': crises})
 
 @register.filter(name='type')
 def get_event_type(log):
@@ -162,18 +162,18 @@ def delete_event(request):
         return HttpResponse("Success", content_type="text/plain")
 
 
-@login_required
-def crisis_calculator(request):
-    """
-        Show suggested crisis
-    """
-    if not is_admin(request.user):
-        return HttpResponseForbidden()
-    tabs = AdminTabViews()
-    tabs.set_active_tab('calculator')
-    crises = CrisisCalculator().check_crisis()
-    print(crises)
-    return render_tab_view(request, tabs, data={'crises': crises})
+# @login_required
+# def crisis_calculator(request):
+#     """
+#         Show suggested crisis
+#     """
+#     if not is_admin(request.user):
+#         return HttpResponseForbidden()
+#     tabs = AdminTabViews()
+#     tabs.set_active_tab('crisis')
+#     crises = CrisisCalculator().check_crisis()
+#     print(crises)
+#     return render_tab_view(request, tabs, data={'crises': crises})
 
 
 @login_required
