@@ -135,8 +135,8 @@ def list_events(request):
     tabs = AdminTabViews()
     tabs.set_active_tab('list')
     return render_tab_view(request, tabs, {
-        'trafficevents': TrafficEvent.objects.filter(event__isactive=True),
-        'terroristevents': TerroristEvent.objects.filter(event__isactive=True)
+        'trafficevents': TrafficEvent.objects.all(),
+        'terroristevents': TerroristEvent.objects.all()
     })
 
 

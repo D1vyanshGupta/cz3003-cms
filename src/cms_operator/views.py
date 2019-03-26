@@ -45,6 +45,27 @@ def deactivate_event(request):
     AgencyDispatcher(event_log).dispatch()
     return redirect('/cms_operator/list')
 
+@login_required
+def activate_event(request):
+    """
+        Activate an event
+    """
+    if not is_operator(request.user):
+        return HttpResponseForbidden()
+    event_id = request.GET.get('eventid')
+    e = Event.objects.get(id=event_id)
+    e.isactive = True
+    e.save()
+    operator = Operator.objects.get(user_ptr_id=request.user.id)
+    event_log = EventTransactionLog.objects.create(
+        event=e,
+        transaction_type='ED',
+        operator=operator,
+        desc='ACTIVATE event')
+    event_log.save()
+    AgencyDispatcher(event_log).dispatch()
+    return redirect('/cms_operator/list')
+# end def
 
 @login_required
 def update_event(request):
@@ -178,8 +199,8 @@ def list_events(request):
     tabs = OperatorTabViews()
     tabs.set_active_tab('list')
     return render_tab_view(request, tabs, {
-        'trafficevents': TrafficEvent.objects.filter(event__isactive=True),
-        'terroristevents': TerroristEvent.objects.filter(event__isactive=True)
+        'trafficevents': TrafficEvent.objects.all(),
+        'terroristevents': TerroristEvent.objects.all(),
     })
 
 

@@ -125,7 +125,11 @@
 						<img src="{% static 'img/injury.png' %}" class="details-img"/>{{event.event.num_injured}}
 						<img src="{% static 'img/caraccident.png' %}" class="details-img"/>{{event.num_vehicles}}
 					</td>
-					<td> <i class="fa fa-edit fa-2x edit-controls" onclick="editEvent({{event.id}}, 'traffic')"></i> <a class="fa fa-toggle-on fa-2x  edit-controls" href="deactivate_event?eventid={{event.event.id}}"></a> </td>
+					{% if event.event.isactive %}
+					<td> <i class="fa fa-edit fa-2x edit-controls" onclick="editEvent({{event.id}}, 'terrorist')"></i> <a class="fa fa-toggle-on fa-2x edit-controls" href="deactivate_event?eventid={{event.event.id}}"></a>  </td>
+					{% else %}
+					<td> <i class="fa fa-edit fa-2x edit-controls" onclick="editEvent({{event.id}}, 'terrorist')"></i> <a class="fa fa-toggle-off fa-2x edit-controls" href="activate_event?eventid={{event.event.id}}"></a>  </td>
+					{% endif %}
 				</tr>
 			{% endfor %}
 		</tbody>
@@ -140,7 +144,7 @@
 			<tr>
 				<th> Name </th>
 				<th> Contact Number </th>
-				<th> Description </th>
+				<th>  <p class="truncate"> Description  </p></th>
 				<th> Details </th>
 				<th> </th>
 			</tr>
@@ -166,7 +170,11 @@
 						<img src="{% static 'img/injury.png' %}" class="details-img"/> {{event.event.num_injured}}
 						<img src="{% static 'img/terrorist.png' %}" class="details-img"/> {{event.num_hostiles}}
 					</td>
+					{% if event.event.isactive %}
 					<td> <i class="fa fa-edit fa-2x edit-controls" onclick="editEvent({{event.id}}, 'terrorist')"></i> <a class="fa fa-toggle-on fa-2x edit-controls" href="deactivate_event?eventid={{event.event.id}}"></a>  </td>
+					{% else %}
+					<td> <i class="fa fa-edit fa-2x edit-controls" onclick="editEvent({{event.id}}, 'terrorist')"></i> <a class="fa fa-toggle-off fa-2x edit-controls" href="activate_event?eventid={{event.event.id}}"></a>  </td>
+					{% endif %}
 				</tr>
 			{% endfor %}
 		</tbody>
