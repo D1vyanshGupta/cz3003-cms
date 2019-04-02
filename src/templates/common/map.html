@@ -4,69 +4,75 @@
 {% block content %}
 
 <style>
+	label, button {
+		margin: 0 10px;
+	}
 
-#content {
-	padding: 0px;
-}
-#map {
-	width: 100%;
-	height: calc(100vh - 130px);
-}
+	input {
+		font-size: 20px;
+		margin-right: 1px;
+	}
 
-#filters-div {
-    height: 60px;
-    padding: 10px 15px;
-}
+	#content {
+		padding: 0px;
+		margin: 0px;
+	}
+	#map {
+		width: 100%;
+		height: calc(100vh - 130px);
+	}
 
-.marker-content {
-    width: 150px;
-}
+	#filters-div {
+	    height: 60px;
+	    padding: 10px 15px;
+	}
 
-.filter-option {
-    display:inline-block;
-    margin-right: 20px;
-    padding: 10px;
-    border:1px solid #c7c7c7;
-    border-radius: 4px;
-}
+	.btn > .fa {
+		font-size: 20px;
+	}
 
-#haze {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    min-width: 100px;
-    height: 160px;
-    padding: 7px;
-    background: rgba(250,250,250,0.8);
-    border-radius: 8px;
+	.marker-content {
+	    width: 150px;
+	}
 
-}
+	#haze {
+	    position: absolute;
+	    bottom: 40px;
+	    left: 250px;
+	    min-width: 100px;
+		max-height: 100%;
+	    padding: 7px;
+	    background: rgba(250,250,250,0.8);
+	    border-radius: 8px;
 
-#haze table {
-    text-align: center;
-}
+	}
 
-#haze thead {
-    border-bottom: 1px solid #787878;
-}
+	#haze table {
+	    text-align: center;
+	}
 
-#haze tr, #haze th {
-    height: 14.8257%;
-    text-align: center;
-}
+	#haze thead {
+	    border-bottom: 1px solid #787878;
+	}
 
-#haze td {
-    width: 25%;
-}
+	#haze tr, #haze th {
+	    height: 14.8257%;
+	    text-align: center;
+	}
+
+	#haze td {
+	    width: 25%;
+	}
 </style>
+
 <div id="filters-div">
-    <span class="filter-option"> Weather <input type="checkbox" name="filter" value="weather" checked /> </span>
-    <span class="filter-option"> Dengue <input type="checkbox" name="filter" value="dengue" checked /> </span>
-    <span class="filter-option haze-filter-option"> Haze <input type="checkbox" name="filter" value="haze" checked /> </span>
-    <span class="filter-option"> Traffic Events <input type="checkbox" name="filter" value="traffic" checked /> </span>
-    <span class="filter-option"> Terrorist Events <input type="checkbox" name="filter" value="terrorist" checked /> </span>
-    <span class="filter-option"> District Boundaries <input type="checkbox" name="filter" value="district" checked /> </span>
-    <button style = "vertical-align: middle;" id = "refreshAPI"><i class="fa fa-refresh fa-2x"></i></button>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="weather" checked /> Weather </label>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="dengue" checked /> Dengue </label>
+    <label class="btn btn-dark filter-option haze-filter-option"> <input type="checkbox" name="filter" value="haze" checked /> Haze </label>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="traffic" checked /> Traffic Events </label>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="terrorist" checked /> Terrorist Events </label>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="district" checked /> District Boundaries </label>
+    <button class="btn btn-dark" id = "refreshAPI"><i class="fa fa-refresh fa-2x"></i></button>
 </div>
 
 <div id="map">

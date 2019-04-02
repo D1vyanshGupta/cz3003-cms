@@ -3,116 +3,202 @@
 
 {% block content %}
 <style>
-.event-types {
-	list-style: none;
-	border: 1px solid #c7c7c7;
-	border-radius: 8px;
+.event-tabs {
 	margin-bottom: 20px;
-	padding: 15px;
-}
-.event-types-list {
-	padding: 0px;
-	margin-bottom: 0px;
 }
 
-.event-types-list li {
-	list-style: none;
-	display: inline-block;
-	height: 50px;
-	padding: 15px;
-	border: 1px solid #c7c7c7;
-	border-radius: 4px;
-	margin-right: 10px;
+.event-type {
+	font-size: 20px;
+	line-height: 2.5rem;
 }
 
-.event-types-list li:hover {
-	border: 1px solid #a7a7a7;
-	cursor: pointer;
+.event-type.active {
+	font-weight: 700;
 }
 
-.event-types-list li.active {
-	background: #a7a7a7;
-	border: 1px solid #a7a7a7;
-	color: white;
-}
-
-.event-forms {
-	padding: 15px;
-	border: 1px solid #c7c7c7;
-	border-radius: 8px;
-}
-
-
-
-.event-forms input, .event-forms textarea {
-	display: block;
-	width: 100%;
-	margin-bottom: 15px;
-}
-
-.event-forms input[type="radio"] {
-	display: inline;
-	margin-left: 8px;
-    width: auto;
+.event-type:hover {
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 #map {
 	width: 100%;
-	height: 400px;
+	height: 460px;
 }
 
 .special-field {
 	display: none;
 }
 
+.button button {
+   color: #ED2553;
+   border: none;
+   width: 20%;
+   line-height: 36px;
+   left: 0%;
+   background-color: transparent;
+   border: 3px solid rgba(0, 0, 0, 0.4);
+   border-radius: 0.25rem;
+   font-weight: 900;
+   font-size: 18px;
+   color: rgba(0, 0, 0, 0.5);
+}
+
+.button button.active {
+   border: 3px solid transparent;
+   color: #fff !important;
+}
+
+.button button:hover {
+   color: #ED2553;
+   border-color: #ED2553;
+}
+
+.button {
+   overflow: hidden;
+   z-index: 2;
+   margin-top: 30px;
+}
+
+.button button {
+   cursor: pointer;
+   position: relative;
+   z-index: 2;
+}
 </style>
 
-<div class="row event-types">
-	<ul class="event-types-list">
-		<li class="event-type active" id="event-traffic" onclick="changeEventType('traffic')"> Traffic Incidents </li>
-		<li class="event-type" id="event-terrorist" onclick="changeEventType('terrorist')"> Terrorist Incidents </li>
-	</ul>
 
+<div class="event-tabs">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link event-type btn btn-default active" id="event-traffic" onclick="changeEventType('traffic')"> Traffic Incidents </a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link event-type btn btn-default" id="event-terrorist" onclick="changeEventType('terrorist')"> Terrorist Incidents </a>
+		</li>
+	</ul>
 </div>
 
-<div class = "row event-forms">
-	<div class="col-md-6">
-		<form action="new" method="post">
-		{% csrf_token %}
-			<input type="text" placeholder="Identification" name="identification" maxlength="10" required />
-			<input type="text" placeholder="Name of person" name="name"  maxlength="128" required/>
-			<input type="text" placeholder="Contact Number" name="contact"  maxlength="8" required/>
+<div class="container-fluid">
 
-			<textarea placeholder="Description" name="description" rows="3" ></textarea>
-			Casulaties:
-			<input type="number" min="0" placeholder="Casualties" name="numCasualties" value="0"/>
-			Injured:
-			<input type="number" min="0" placeholder="Injured" name="numInjured" value="0"/>
-			<div class="special-fields">
-				<div class="terrorist-fields special-field">
-					Number of Hostiles:
-					<input type="number" value="0" name="numHostiles" />
+	<div class="row">
 
-					Type of Attack: <br>
-					 <input type="radio" name="attacktype" value="BMB" checked> Bomb
-					 <input type="radio" name="attacktype" value="BCH"> Biochemical
-					 <input type="radio" name="attacktype" value="HST"> Hostage
+		<div class="col">
+			<form action="new" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					<label class="sr-only" for="identification">ID</label>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">ID</div>
+						</div>
+						<input class="form-control" type="text" name="identification" maxlength="10" required />
+					</div>
 				</div>
-				<div class="traffic-fields special-field">
-				Number of Vehicles:
-				<input type="number" min="0" value="0" name="numVehicles" />
+				<div class="form-group">
+					<label class="sr-only" for="name">Name</label>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">Name</div>
+						</div>
+						<input class="form-control" type="text" name="name"  maxlength="128" required/>
+					</div>
 				</div>
-			</div>
-			Location: (choose from map) <input id="location" type="text" placeholder="Location" name="location" required />
+				<div class="form-group">
+					<label class="sr-only" for="contact">Contact No.</label>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">Contact No.</div>
+						</div>
+						<input class="form-control" type="text" name="contact"  maxlength="8" required/>
+					</div>
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" placeholder="Description" rows="3" ></textarea>
+				</div>
 
-			<input type="hidden" name="eventtype" id="eventtype" value="traffic" />
-			<button type="submit"  class="btn-primary">Submit</button>
-		</form>
-	</div>
-	<div class="col-md-6">
-		<div id = "map">
+				<div class="form-row form-group">
+
+					<div class="col-sm">
+						<label class="sr-only" for="numCasualties">Casulaties:</label>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<div class="input-group-text">Casulaties</div>
+							</div>
+							<input class="form-control" type="number" min="0" placeholder="Casualties" name="numCasualties" value="0"/>
+						</div>
+					</div>
+
+					<div class="col-sm">
+						<label class="sr-only" for="numInjured">Injured:</label>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<div class="input-group-text">Injured</div>
+							</div>
+							<input class="form-control" type="number" min="0" placeholder="Injured" name="numInjured" value="0"/>
+						</div>
+					</div>
+
+					<div class="col-sm traffic-fields special-field">
+						<label class="sr-only" for="numVehicles">Number of Vehicles</label>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<div class="input-group-text">Vehicles</div>
+							</div>
+							<input class="form-control" type="number" min="0" value="0" name="numVehicles" />
+						</div>
+					</div>
+
+					<div class="col-sm terrorist-fields special-field">
+						<label class="sr-only" for="numHostiles">Hostiles</label>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<div class="input-group-text">Hostiles</div>
+							</div>
+							<input class="form-control" type="number" value="0" name="numHostiles"/>
+						</div>
+					</div>
+
+				</div>
+				<!-- ./form-row -->
+
+				<div class="form-group terrorist-fields special-field">
+					<label class="form-check-label" for="attacktype"></label>Type of Attack: <br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="attacktype" value="BMB" checked>
+						<label class="form-check-label" for="attacktype">Bomb</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="attacktype" value="BCH">
+						<label class="form-check-label" for="attacktype">Biochemical</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="attacktype" value="HST">
+						<label class="form-check-label" for="attacktype">Hostage</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="sr-only" for="location">Location</label>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">Location</div>
+						</div>
+						<input class="form-control" id="location" type="text" placeholder="Choose from map" name="location" required />
+					</div>
+				</div>
+
+				<input type="hidden" name="eventtype" id="eventtype" value="traffic" />
+				<div class="button">
+					<button type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="col">
+			<div id = "map"></div>
 		</div>
 	</div>
+
 </div>
 
 

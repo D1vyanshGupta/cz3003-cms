@@ -1,29 +1,42 @@
-Identification:
-<input type="text" placeholder="Identification" name="identification" maxlength="10" required/>
-Name:
-<input type="text" placeholder="Name of Person" name="name" maxlength="128" required />
-Contact:
-<input type="tel" placeholder="Contact Number" name="contact" maxlength="8" required />
-
-<textarea placeholder="Description" name="description" rows="3" > {{event.event.description }}</textarea>
-Casualties:
-<input type="number" placeholder="Casualties" name="numCasualties" value="{{ event.event.num_casualties }}"/>
-Injured:
-<input type="number" placeholder="Injured" name="numInjured" value="{{ event.event.num_injured }}"/>
-<div class="special-fields">
-	{% if eventtype == 'terrorist' %}
-	<div class="terrorist-fields special-field">
-		Number of hostiles:
-		<input type="number" value="{{ event.num_hostiles }}" name="numHostiles" />
+<!-- Event Update Form -->
+<div class="form-group row">
+	<label class="col-sm-2 col-form-label" for="identification">Identification:</label>
+	<div class="col-sm-10">
+		<input class="form-control" type="text"  name="identification" maxlength="10" required/>
 	</div>
+</div>
+<div class="form-group row">
+	<label class="col-sm-2 col-form-label" for="name">Name:</label>
+	<div class="col-sm-10">
+		<input class="form-control" type="text" of Person" name="name" maxlength="128" required />
+	</div>
+</div>
+<div class="form-group row">
+	<label class="col-sm-2 col-form-label" for="contact">Contact:</label>
+	<div class="col-sm-10">
+		<input class="form-control" type="tel" name="contact" maxlength="8" required />
+	</div>
+</div>
+<div class="form-group row">
+	<label class="col-sm-2 col-form-label" for="description">Description:</label>
+	<div class="col-sm-10">
+		<textarea class="form-control"  name="description" rows="3" > {{event.event.description }}</textarea>
+	</div>
+</div>
+<div class="form-inline">
+	<label class="" for="numCasualties">Casualties:</label>
+	<input class="form-control col-sm-1 " type="number"  name="numCasualties" value="{{ event.event.num_casualties }}"/>
+	<label class="" for="numInjured">Injured:</label>
+	<input class="form-control col-sm-1 " type="number"  name="numInjured" value="{{ event.event.num_injured }}"/>
+	{% if eventtype == 'terrorist' %}
+	<label class="" for="numHostiles">Number of hostiles:</label>
+	<input class="form-control col-sm-1 " type="number" value="{{ event.num_hostiles }}" name="numHostiles" />
 	{% elif eventtype == 'traffic' %}
-		<div class="traffic-fields special-field">
-		Number of vehicles:
-		<input type="number" value="{{ event.num_vehicles }}" name="numVehicles" />
-		</div>
+	<label class="" for="numVehicles">Number of vehicles:</label>
+	<input class="form-control col-sm-1 " type="number" value="{{ event.num_vehicles }}" name="numVehicles" />
 	{% endif %}
 </div>
 
 
-<input type="hidden" name="eventtype" id="eventtype" value="{{ eventtype }}" />
-<input type="hidden" name="eventid" id="eventid" value="{{ event.id }}" />
+<input  class="form-control" type="hidden" name="eventtype" id="eventtype" value="{{ eventtype }}" />
+<input  class="form-control" type="hidden" name="eventid" id="eventid" value="{{ event.id }}" />

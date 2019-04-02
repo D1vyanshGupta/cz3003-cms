@@ -4,61 +4,82 @@
   <head>
     <title>Login - Crisis Management System</title>
     <meta charset="utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
-    <script src="{% static "js/backstretch.min.js" %}"></script>
-    <link href="{% static "css/login.css" %}" rel="stylesheet">
+
+	<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
   </head>
 
   <body>
+    <div class="container-custom">
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/index"><img src="{% static "css/logo.png" %}"></a>
-        </div>
-      </div>
-    </div>
+        <div class="box">
+            <div class="title">LOGIN</div>
 
-    <div class="container">
-
-        <div id="login-wraper">
-            <form class="form login-form" action="" method="post">
+            <form method="post">
                 {% csrf_token %}
-                <legend>Sign in to <span class="blue">CMS</span></legend>
-                <div class="body">
-                  <div>
-                    <label>Username</label>
+                <div class="form-group input">
+                    <label for="username">Username</label>
                     <input type="text" id="username" name="username">
-                  </div>
-                  <div>
-                    <label>Password</label>
-                    <input type="password" id="password" name="password" style="margin-left:5px">
-                  </div>
+                    <span class="spin"></span>
+                </div>
+                <div class="form-group input">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                    <span class="spin"></span>
+                </div>
+                <div class="button login">
+                    <button type="submit" id="login"><span>GO</span> <i class="fa fa-check"></i></button>
                 </div>
 
-                <div class="footer">
-                    <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1">Remember me
-                    </label>
-                    <button type="submit" class="btn btn-success" id="login">Login</button>
-                </div>
-
+                <a href="" class="pass-forgot">Forgot your password?</a>
             </form>
         </div>
 
+        <div class="overbox">
+            <div class="material-button alt-2"><span class="shape"></span></div>
+
+            <div class="title">REGISTER</div>
+
+            <div class="form-group input">
+                <label for="regname">Username</label>
+                <input type="text" name="regname" id="regname">
+                <span class="spin"></span>
+            </div>
+
+            <div class="form-group input">
+                <label for="regpass">Password</label>
+                <input type="password" name="regpass" id="regpass">
+                <span class="spin"></span>
+            </div>
+
+            <div class="form-group input">
+                <label for="reregpass">Repeat Password</label>
+                <input type="password" name="reregpass" id="reregpass">
+                <span class="spin"></span>
+            </div>
+
+            <div class="button">
+                <button><span>NEXT</span></button>
+            </div>
+
+
+        </div>
+
     </div>
 
-    <footer class="white navbar-fixed-bottom" style="text-align:center">
-      Crisis Management System - 2016 Team JIALAT CZ3003 - All rights reserved.
+    <footer class="navbar fixed-bottom">
+        <div class="container my-auto text-center" style="display:inline-block;color:white">
+            <p>Crisis Management System - 2016 Team JIALAT CZ3003 - All rights reserved.</p>
+        </div>
     </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.min.js'}"></script>
+    <script  src="{% static 'js/login.js' %}"></script>
   </body>
 </html>

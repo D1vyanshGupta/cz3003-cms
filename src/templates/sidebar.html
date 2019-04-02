@@ -1,9 +1,12 @@
 {% if 'public' not in request.path %}
-<div class="nav navbar-nav sidebar col-md-3">
-  <ul>
+  <ul class="sidebar navbar-nav">
     {% for tab in tabs %}
-      <li class="{% if tab.is_active %} active {% endif %} "><a href="/{{ tab.url }}"><i class="fa fa-{{tab.icon}}"></i> {{ tab.title }}</a></li>
+      <li class="nav-item {% if tab.is_active %} active {% endif %}">
+          <a class="nav-link" href="/{{ tab.url }}">
+              <i class="fa fa-{{tab.icon}}"></i>
+              <span>{{ tab.title }}</span>
+          </a>
+      </li>
     {% endfor %}
   </ul>
-</div>
 {% endif %}

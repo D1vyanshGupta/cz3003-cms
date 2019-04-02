@@ -1,0 +1,163 @@
+/*
+* Operator List Tab View
+*/
+thead {
+	border-collapse: separate !important;
+}
+a:hover, a:focus {
+	text-decoration: none;
+	cursor: auto;
+}
+
+img {
+	width: 20px;
+	height: 20px;
+	margin-left: 5px;
+}
+
+.truncate {
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  margin: 0px;
+}
+
+.card-header {
+	font-size: 20px;
+}
+
+.edit-controls {
+	cursor: pointer;
+}
+
+.fa-toggle-on, .fa-toggle-off {
+	color: #ED2553;
+}
+
+.edit-controls:hover {
+	color: #ED2553;
+}
+
+.event-forms input, .event-forms textarea {
+	display: inline-block;
+	width: 100%;
+}
+
+/* Update Modal Form */
+.modal-dialog {
+	margin: 5rem auto;
+}
+
+.modal-content {
+	padding: 30px;
+	width: 100% !important;
+	background-color: #F7F7F7;
+	margin: 0 auto;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+}
+
+.modal-header {
+	width: 100%;
+	border-bottom: 0 none;
+	letter-spacing: 2px;
+	line-height: 40px;
+	font-weight: 700;
+	font-size: 36px;
+	position: relative;
+	color: #ED2553;
+}
+
+.modal-header:before {
+   content: "";
+   width: 6px;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: -30px;
+   background: #ED2553;
+}
+
+.modal-header button {
+	color: #ED2553;
+	font-size: 30px;
+}
+
+.modal-header button:hover {
+	color: #ED2553;
+}
+
+.modal-body {
+	margin-top: 10px;
+}
+
+.modal-footer {
+	border-top: 0 none;
+}
+
+
+/*
+* Event Update Form
+*/
+label {
+	font-weight: bold;
+}
+
+.event-forms {
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+.form-inline > input {
+	margin-left: 33px;
+	margin-right: 37px;
+}
+
+.button button {
+   color: #ED2553;
+   border: none;
+   width: 100%;
+   line-height: 64px;
+   left: 0%;
+   background-color: transparent;
+   border: 3px solid rgba(0, 0, 0, 0.3);
+   font-weight: 900;
+   font-size: 18px;
+   color: rgba(0, 0, 0, 0.4);
+}
+
+.button button.active {
+   border: 3px solid transparent;
+   color: #fff !important;
+}
+
+.button button i.fa {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   line-height: 60px;
+   transform: scale(0) rotate(-45deg);
+   -webkit-transform: scale(0) rotate(-45deg);
+   -ms-transform: scale(0) rotate(-45deg);
+}
+
+.button button:hover {
+   color: #ED2553;
+   border-color: #ED2553;
+}
+
+.button {
+   overflow: hidden;
+   z-index: 2;
+   margin-top: 30px;
+}
+
+.button button {
+   cursor: pointer;
+   position: relative;
+   z-index: 2;
+}

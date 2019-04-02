@@ -4,186 +4,166 @@
 {% block content %}
 {% load staticfiles %}
 <style>
-	table a:link {
-	  color: #666;
-	  font-weight: bold;
-	  text-decoration: none; 
-	}
-	table a:visited {
-	  color: #999999;
-	  font-weight: bold;
-	  text-decoration:none;
-	}
-	table a:active,
-	table a:hover {
-		color: #bd5a35;
-		text-decoration:underline;
+	a {
+		font-weight: 400;
+		line-height: 1.5;
+		font-size: 1.2rem;
 	}
 
-	table {
-		font-family:Arial, Helvetica, sans-serif;
-		color:#666;
-		font-size:12px;
-		text-shadow: 1px 1px 0px #fff;
-		background:#eaebec;
-		margin:20px;
-		border:#ccc 1px solid;
-		width: 100%;
-		height:100%;
-
-		-moz-border-radius:3px;
-		-webkit-border-radius:3px;
-		border-radius:3px;
-
-		-moz-box-shadow: 0 1px 2px #d1d1d1;
-		-webkit-box-shadow: 0 1px 2px #d1d1d1;
-		box-shadow: 0 1px 2px #d1d1d1;
+	a:hover, a:focus {
+		text-decoration: none;
 	}
 
-	table th {
-		padding:21px 25px 22px 25px;
-		border-top:1px solid #fafafa;
-		border-bottom:1px solid #e0e0e0;
-		text-align: center;
-		background: #ededed;
-		background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
-		background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+	.breadcrumb {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		padding: 0.75rem 1rem;
+		margin-bottom: 1rem;
+		list-style: none;
+		background-color: #e9ecef;
+		border-radius: 0.25rem;
+		position: fixed;
+		top: 80px;
+		left: 240px;
+		z-index: 5;
 	}
-	table th:first-child {
-		text-align: center;
-		padding-left:20px;
-	}
-	table tr:first-child th:first-child {
-		-moz-border-radius-topleft:3px;
-		-webkit-border-top-left-radius:3px;
-		border-top-left-radius:3px;
-	}
-	table tr:first-child th:last-child {
-		-moz-border-radius-topright:3px;
-		-webkit-border-top-right-radius:3px;
-		border-top-right-radius:3px;
-	}
-	table tr {
-		text-align: center;
-		padding-left:20px;
-	}
-	table td:first-child {
-		text-align: left;
-		padding-left:20px;
-		border-left: 0;
-	}
-	table td {
-		padding:18px;
-		border-top: 1px solid #ffffff;
-		border-bottom:1px solid #e0e0e0;
-		border-left: 1px solid #e0e0e0;
 
-		background: #fafafa;
-		background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
-		background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+	.breadcrumb-item + .breadcrumb-item {
+		padding-left: 0.5rem;
 	}
-	table tr.even td {
-		background: #f6f6f6;
-		background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
-		background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+
+	.breadcrumb-item + .breadcrumb-item::before {
+		display: inline-block;
+		padding-right: 0.5rem;
+		color: #6c757d;
+		content: "|";
 	}
-	table tr:last-child td {
-		border-bottom:0;
+
+	.breadcrumb-item + .breadcrumb-item:hover::before {
+		text-decoration: underline;
 	}
-	table tr:last-child td:first-child {
-		-moz-border-radius-bottomleft:3px;
-		-webkit-border-bottom-left-radius:3px;
-		border-bottom-left-radius:3px;
+
+	.breadcrumb-item + .breadcrumb-item:hover::before {
+		text-decoration: none;
 	}
-	table tr:last-child td:last-child {
-		-moz-border-radius-bottomright:3px;
-		-webkit-border-bottom-right-radius:3px;
-		border-bottom-right-radius:3px;
+
+	.breadcrumb-item.active {
+		color: #6c757d;
 	}
-	table tr:hover td {
-		background: #f2f2f2;
-		background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
-		background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
-	}
-	  
-	.tab {
-	  width: 100vh;
-	  height: 60px;
-	  padding: 20px 20px;
-	  background-color: rgba(255,255,255,0.7);
-	  position: fixed;
-	  top: 70px;
-	  left: 225px;
-	}
+
 	.tablediv {
-		padding-top: 120px;
+		padding-top: 80px;
+		width: 100%;
 	}
 
+	.log-table {
+		margin-top: 100px;
+		z-index: 0;
+	}
 </style>
-<div>
 
-<div class="tab">
-  <a href='#Incidents'> Incidents</a> |
-  <a href='#Crisis'> Crisis</a>
-</div>
-<div class = "tablediv" id='Incidents'>
-	<table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+<div class="container-fluid">
 
-	<!-- Table Header -->
-	<thead>
-		<tr>
-			<th>Event Type</th>
-			<th>Location</th>
-			<th>Log Type</th>
-			<th>Changes Made</th>
-			<th>Operator/Admin</th>
-		</tr>
-	</thead>
-	<!-- Table Header -->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href='#Incidents'>Incidents</a>
+		</li>
+		<li class="breadcrumb-item">
+			<a href='#Crisis'>Crisis</a>
+		</li>
+	</ol>
 
-	<!-- Table Body -->
-	<tbody>
-		{% for log in data.eventTransactionLog %}
-			<tr {% if forloop.counter0|divisibleby:2 %} class='even'{% endif %}>
-				<td>{{log|type}}</td>
-				<td>{{log.event.location|address}}</td>
-				<td>{{log|tran}}
-				<td>{{log.desc}}</td>
-				<td>{{log|adminop}}</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-	<!-- Table Body -->
+	<div class ="card mb-3 log-table" id='Incidents'>
+		<div class="card-header">
+			<b><i class="fa fa-table"></i> Incidents </b>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped table-hover w-100" cellspacing='0'>
 
-	</table>
-</div>
-<div class="tablediv" id='Crisis'>
-		<table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+					<thead>
+						<tr>
+							<th style="width:16%">Event Type</th>
+							<th style="width:14%">Location</th>
+							<th style="width:14%">Log Type</th>
+							<th style="width:40%">Changes Made</th>
+							<th style="width:16%">Operator/Admin</th>
+						</tr>
+					</thead>
 
-		<!-- Table Header -->
-		<thead>
-			<tr>
-				<th>District</th>
-				<th>New Crisis Level</th>
-				<th>Admin ID</th>
-				<th>Time</th>
-			</tr>
-		</thead>
-		<!-- Table Header -->
+					<tfoot>
+						<tr>
+							<th style="width:16%">Event Type</th>
+							<th style="width:14%">Location</th>
+							<th style="width:14%">Log Type</th>
+							<th style="width:40%">Changes Made</th>
+							<th style="width:16%">Operator/Admin</th>
+						</tr>
+					</tfoot>
 
-		<!-- Table Body -->
-		<tbody>
-			{% for log in data.crisisLogDatabase %}
-				<tr {% if forloop.counter0|divisibleby:2 %} class='even'{% endif %}>
-					<td>{{log.district}}</td>
-					<td>{{log.new_crisis}}</td>
-					<td>{{log.admin}}</td>
-					<td>{{log.date_recorded}}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-		<!-- Table Body -->
+					<tbody>
+						{% for log in data.eventTransactionLog %}
+						<tr {% if forloop.counter0|divisibleby:2 %} class='even'{% endif %}>
+							<td>{{log|type}}</td>
+							<td>{{log.event.location|address}}</td>
+							<td>{{log|tran}}
+							<td>{{log.desc}}</td>
+							<td>{{log|adminop}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
 
-		</table>
+				</table>
+			</div>
+		</div>
 	</div>
+
+	<div class="card mb-3 log-table" id='Crisis'>
+		<div class="card-header">
+			<b><i class="fa fa-table"></i> Crisis </b>
+		</div>
+
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped w-100" cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+
+					<thead>
+						<tr>
+							<th style="width:25%">District</th>
+							<th style="width:25%">New Crisis Level</th>
+							<th style="width:25%">Admin ID</th>
+							<th style="width:25%">Time</th>
+						</tr>
+					</thead>
+
+					<tfoot>
+						<tr>
+							<th style="width:25%">District</th>
+							<th style="width:25%">New Crisis Level</th>
+							<th style="width:25%">Admin ID</th>
+							<th style="width:25%">Time</th>
+						</tr>
+					</tfoot>
+
+					<tbody>
+						{% for log in data.crisisLogDatabase %}
+						<tr {% if forloop.counter0|divisibleby:2 %} class='even'{% endif %}>
+							<td>{{log.district}}</td>
+							<td>{{log.new_crisis}}</td>
+							<td>{{log.admin}}</td>
+							<td>{{log.date_recorded}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+					<!-- Table Body -->
+
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
 {% endblock content %}

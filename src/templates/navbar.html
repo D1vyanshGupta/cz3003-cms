@@ -1,24 +1,27 @@
-<div id="header" class="navbar-collapse">
-  <div id="logo_section">
-     Crisis Management System | {% if 'cms_admin' in request.path %}
+<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
+    <div class="navbar-brand mr-1">
+        Crisis Management System | {% if 'cms_admin' in request.path %}
         Admin
-    {% elif 'cms_operator' in request.path %}
+        {% elif 'cms_operator' in request.path %}
         Operator
-    {% else %}
+        {% else %}
         Public
-    {% endif %}
-  </div>
-  {% if 'public' not in request.path %}
-    <a href="{% url 'logout' %}">
-      <div id="logout">
-        Logout
-      </div>
-    </a>
-    {% else %}
-    <!-- <a href = "{% url 'login' %}">
-      <div id="login">
-        Login
-      </div>
-    </a> -->
-  {% endif %}
-</div>
+        {% endif %}
+    </div>
+    <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        {% if user.is_staff %}
+        <li class="nav-item">
+            <a href="/cms_admin/send_report" class="nav-link"> <i class="fa fa-send"></i> Send report</a>
+        </li>
+        {% endif %}
+        {% if 'public' not in request.path %}
+        <li class="nav-item">
+            <a href="{% url 'logout' %}" class="nav-link">
+                <div id="logout">
+                    <i class="fa fa-sign-out"></i> Logout
+                </div>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>

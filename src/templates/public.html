@@ -5,13 +5,26 @@
 <head>
   <title>Public Map</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js'}"></script>
   <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
   <style>
+      label, button {
+          margin: 0 10px;
+      }
+
+      input {
+          font-size: 20px;
+          margin-right: 1px;
+      }
+
+      .fa {
+          font-size: 20px;
+      }
+
     #filters-div {
       padding: 10px;
     }
@@ -30,20 +43,12 @@
       width: 150px;
     }
 
-    .filter-option {
-      display: inline-block;
-      margin-right: 20px;
-      padding: 10px;
-      border: 1px solid #c7c7c7;
-      border-radius: 4px;
-    }
-
     #haze {
       position: absolute;
       bottom: 20px;
       left: 20px;
       min-width: 100px;
-      height: 160px;
+      max-height: 100%;
       padding: 7px;
       background: rgba(250, 250, 250, 0.8);
       border-radius: 8px;
@@ -72,12 +77,12 @@
 
 <body>
   <div id="filters-div">
-    <span class="filter-option"> Show Weather <input type="checkbox" name="filter" value="weather" checked /> </span>
-    <span class="filter-option"> Show Dengue <input type="checkbox" name="filter" value="dengue" checked /> </span>
-    <span class="filter-option haze-filter-option"> Show Haze <input type="checkbox" name="filter" value="haze" checked /> </span>
-    <span class="filter-option"> Show Traffic Events <input type="checkbox" name="filter" value="traffic" checked /> </span>
-    <span class="filter-option"> Show Terrorist Events <input type="checkbox" name="filter" value="terrorist" checked /> </span>
-    <button style="vertical-align: middle;" id="refreshAPI"><i class="fa fa-refresh fa-2x"></i></button>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="weather" checked /> Weather </label>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="dengue" checked /> Dengue </label>
+    <label class="btn btn-dark filter-option haze-filter-option"> <input type="checkbox" name="filter" value="haze" checked /> Haze </label>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="traffic" checked /> Traffic Events </label>
+    <label class="btn btn-dark filter-option"> <input type="checkbox" name="filter" value="terrorist" checked /> Terrorist Events </label>
+    <button class="btn btn-dark" id = "refreshAPI"><i class="fa fa-refresh fa-2x"></i></button>
   </div>
 
   <div id="map">

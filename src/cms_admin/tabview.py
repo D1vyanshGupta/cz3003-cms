@@ -78,4 +78,4 @@ class AdminTabViews(TabViews):
 
     def __init__(self):
         self.tabs = [
-            AdminLogView(), AdminCrisisView(), AdminMapView(), AdminListEvents(), AdminReport()]
+            AdminLogView(), AdminCrisisView(), AdminMapView(), AdminListEvents()]

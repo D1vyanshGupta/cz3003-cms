@@ -1,384 +1,406 @@
-@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700|Lato:100,300,400);
-/* ##########  */
-/*   $GLOBAL   */
-/* ##########  */
-/* line 10, ../sass/typica-login.scss */
-html {
-  height: 100%;
+a:hover, a:focus {
+    text-decoration: none;
+    cursor: auto;
 }
 
-/* line 13, ../sass/typica-login.scss */
+.box {
+   position: relative;
+   top: 0;
+   opacity: 1;
+   float: left;
+   padding: 60px 50px 40px 50px;
+   width: 100%;
+   background: #fff;
+   border-radius: 10px;
+   transform: scale(1);
+   -webkit-transform: scale(1);
+   -ms-transform: scale(1);
+   z-index: 5;
+}
+
+.box.back {
+   transform: scale(.95);
+   -webkit-transform: scale(.95);
+   -ms-transform: scale(.95);
+   top: -20px;
+   opacity: .8;
+   z-index: -1;
+}
+
+.box:before {
+   content: "";
+   width: 100%;
+   height: 30px;
+   border-radius: 10px;
+   position: absolute;
+   top: -10px;
+   background: rgba(255, 255, 255, .6);
+   left: 0;
+   transform: scale(.95);
+   -webkit-transform: scale(.95);
+   -ms-transform: scale(.95);
+   z-index: -1;
+}
+
+.overbox .title {
+   color: #fff;
+}
+
+.overbox .title:before {
+   background: #fff;
+}
+
+.title {
+   width: 100%;
+   float: left;
+   line-height: 46px;
+   font-size: 34px;
+   font-weight: 700;
+   letter-spacing: 2px;
+   color: #ED2553;
+   position: relative;
+}
+
+.title:before {
+   content: "";
+   width: 5px;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: -50px;
+   background: #ED2553;
+}
+
+.input,
+.input label,
+.input input,
+.input .spin,
+.button,
+.button button .button.login button i.fa,
+.material-button .shape:before,
+.material-button .shape:after,
+.button.login button {
+   transition: 300ms cubic-bezier(.4, 0, .2, 1);
+   -webkit-transition: 300ms cubic-bezier(.4, 0, .2, 1);
+   -ms-transition: 300ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.material-button,
+.alt-2,
+.material-button .shape,
+.alt-2 .shape,
+.box {
+   transition: 400ms cubic-bezier(.4, 0, .2, 1);
+   -webkit-transition: 400ms cubic-bezier(.4, 0, .2, 1);
+   -ms-transition: 400ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.input,
+.input label,
+.input input,
+.input .spin,
+.button,
+.button button {
+   width: 100%;
+   float: left;
+}
+
+.input,
+.button {
+   margin-top: 30px;
+   height: 70px;
+}
+
+.input,
+.input input,
+.button,
+.button button {
+   position: relative;
+}
+
+.input input {
+   height: 60px;
+   top: 10px;
+   border: none;
+   background: transparent;
+}
+
+.input input,
+.input label,
+.button button {
+   font-family: 'Roboto', sans-serif;
+   font-size: 24px;
+   color: rgba(0, 0, 0, 0.8);
+   font-weight: 300;
+}
+
+.input:before,
+.input .spin {
+   width: 100%;
+   height: 1px;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+}
+
+.input:before {
+   content: "";
+   background: rgba(0, 0, 0, 0.1);
+   z-index: 3;
+}
+
+.input .spin {
+   background: #ED2553;
+   z-index: 4;
+   width: 0;
+}
+
+.overbox .input .spin {
+   background: rgba(255, 255, 255, 1);
+}
+
+.overbox .input:before {
+   background: rgba(255, 255, 255, 0.5);
+}
+
+.input label {
+   position: absolute;
+   top: 10px;
+   left: 0;
+   z-index: 2;
+   cursor: pointer;
+   line-height: 60px;
+}
+
+.button.login {
+   width: 60%;
+   left: 20%;
+}
+
+.button.login button,
+.button button {
+   width: 100%;
+   line-height: 64px;
+   left: 0%;
+   background-color: transparent;
+   border: 3px solid rgba(0, 0, 0, 0.1);
+   font-weight: 900;
+   font-size: 18px;
+   color: rgba(0, 0, 0, 0.2);
+}
+
+.button.login {
+   margin-top: 30px;
+}
+
+.button {
+   margin-top: 20px;
+}
+
+.button button {
+   background-color: #fff;
+   color: #ED2553;
+   border: none;
+}
+
+.button.login button.active {
+   border: 3px solid transparent;
+   color: #fff !important;
+}
+
+.button.login button.active span {
+   opacity: 0;
+   transform: scale(0);
+   -webkit-transform: scale(0);
+   -ms-transform: scale(0);
+}
+
+.button.login button.active i.fa {
+   opacity: 1;
+   transform: scale(1) rotate(-0deg);
+   -webkit-transform: scale(1) rotate(-0deg);
+   -ms-transform: scale(1) rotate(-0deg);
+}
+
+.button.login button i.fa {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   line-height: 60px;
+   transform: scale(0) rotate(-45deg);
+   -webkit-transform: scale(0) rotate(-45deg);
+   -ms-transform: scale(0) rotate(-45deg);
+}
+
+.button.login button:hover {
+   color: #ED2553;
+   border-color: #ED2553;
+}
+
+.button {
+   margin: 40px 0;
+   overflow: hidden;
+   z-index: 2;
+}
+
+.button button {
+   cursor: pointer;
+   position: relative;
+   z-index: 2;
+}
+
+.pass-forgot {
+   width: 100%;
+   float: left;
+   text-align: center;
+   color: rgba(0, 0, 0, 0.4);
+   font-size: 18px;
+}
+
+.click-efect {
+   position: absolute;
+   top: 0;
+   left: 0;
+   background: #ED2553;
+   border-radius: 50%;
+}
+
+.overbox {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   overflow: inherit;
+   border-radius: 10px;
+   padding: 60px 50px 40px 50px;
+}
+
+.overbox .title,
+.overbox .button,
+.overbox .input {
+   z-index: 111;
+   position: relative;
+   color: #fff !important;
+   display: none;
+}
+
+.overbox .title {
+   width: 80%;
+}
+
+.overbox .input {
+   margin-top: 20px;
+}
+
+.overbox .input input,
+.overbox .input label {
+   color: #fff;
+}
+
+.overbox .material-button,
+.overbox .material-button .shape,
+.overbox .alt-2,
+.overbox .alt-2 .shape {
+   display: block;
+}
+
+.material-button,
+.alt-2 {
+   width: 140px;
+   height: 140px;
+   border-radius: 50%;
+   background: #ED2553;
+   position: absolute;
+   top: 40px;
+   right: -70px;
+   cursor: pointer;
+   z-index: 100;
+   transform: translate(0%, 0%);
+   -webkit-transform: translate(0%, 0%);
+   -ms-transform: translate(0%, 0%);
+}
+
+.material-button .shape,
+.alt-2 .shape {
+   position: absolute;
+   top: 0;
+   right: 0;
+   width: 100%;
+   height: 100%;
+}
+
+.material-button .shape:before,
+.alt-2 .shape:before,
+.material-button .shape:after,
+.alt-2 .shape:after {
+   content: "";
+   background: #fff;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%) rotate(360deg);
+   -webkit-transform: translate(-50%, -50%) rotate(360deg);
+   -ms-transform: translate(-50%, -50%) rotate(360deg);
+}
+
+.material-button .shape:before,
+.alt-2 .shape:before {
+   width: 25px;
+   height: 4px;
+}
+
+.material-button .shape:after,
+.alt-2 .shape:after {
+   height: 25px;
+   width: 4px;
+}
+
+.material-button.active,
+.alt-2.active {
+   top: 50%;
+   right: 50%;
+   transform: translate(50%, -50%) rotate(0deg);
+   -webkit-transform: translate(50%, -50%) rotate(0deg);
+   -ms-transform: translate(50%, -50%) rotate(0deg);
+}
+
 body {
-  background: url(background.png) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-@media (min-width: 979px) {
-  /* line 13, ../sass/typica-login.scss */
-  body {
-    padding-top: 80px;
-  }
+   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(background.png);
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   min-height: 100vh;
+   font-family: 'Roboto', sans-serif;
 }
 
-/* line 21, ../sass/typica-login.scss */
-.blue {
-  color: #447fc8;
+body,
+html {
+   overflow: hidden;
 }
 
-/* line 25, ../sass/typica-login.scss */
-.btn-black {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  padding: 5px 20px;
-  background-color: #222222;
-  background-image: none;
-  color: white;
-  text-shadow: none;
-}
-/* line 33, ../sass/typica-login.scss */
-.btn-black:hover {
-  background: #333333;
-  color: white;
+.container-custom {
+   width: 100%;
+   max-width: 460px;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
 }
 
-/* ########### */
-/* $NAVIGATION */
-/* ########### */
-/* line 43, ../sass/typica-login.scss */
-.navbar .brand {
-  margin-top: 20px;
-  padding-bottom: 8px;
-  max-height: 40px;
-  width: auto;
-}
-/* line 49, ../sass/typica-login.scss */
-.navbar .navbar-inner {
-  height: 80px;
-  background: white;
-  filter: none;
-}
-/* line 54, ../sass/typica-login.scss */
-.navbar .nav {
-  margin-top: 20px;
-}
-/* line 56, ../sass/typica-login.scss */
-.navbar .nav > li > a {
-  padding: 10px 10px 11px;
-  color: #333;
-  text-shadow: none;
-}
-/* line 63, ../sass/typica-login.scss */
-.navbar .nav > li > a:hover {
-  color: #111;
-}
-/* line 67, ../sass/typica-login.scss */
-.navbar .nav > li.active > a {
-  background: none;
-  color: #111;
-}
-/* line 70, ../sass/typica-login.scss */
-.navbar .nav > li.active > a:hover {
-  background: none;
-  color: #111;
-}
-
-/* ####### */
-/* $LOGIN  */
-/* ####### */
-/* line 80, ../sass/typica-login.scss */
-#login-wraper {
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  margin-top: -185px;
-  margin-left: -235px;
-  padding: 25px;
-  width: 420px;
-  height: 320px;
-  background: white;
-  text-align: center;
-}
-
-/* line 97, ../sass/typica-login.scss */
-.login-form legend {
-  margin-top: 5px;
-  margin-bottom: 30px;
-  padding-bottom: 25px;
-}
-/* line 102, ../sass/typica-login.scss */
-.login-form .body {
-  padding-bottom: 30px;
-  border-bottom: 1px solid #eeeeee;
-}
-/* line 106, ../sass/typica-login.scss */
-.login-form .footer {
-  margin-top: 20px;
-}
-/* line 108, ../sass/typica-login.scss */
-.login-form .footer .checkbox.inline {
-  display: inline;
-}
-/* line 110, ../sass/typica-login.scss */
-.login-form .footer .checkbox.inline input[type="checkbox"] {
-  float: none;
-  margin-top: 9px;
-}
-/* line 115, ../sass/typica-login.scss */
-.login-form .footer .btn {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  margin-left: 15px;
-  padding: 7px 25px;
-  background-image: none;
-}
-
-/* ######### */
-/* $REGISTER */
-/* ######### */
-/* line 127, ../sass/typica-login.scss */
-#register-wraper {
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  margin-top: 25px;
-  margin-bottom: 70px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  background: white;
-  text-align: center;
-}
-
-/* line 137, ../sass/typica-login.scss */
-#register-form {
-  margin: 0 auto;
-  width: 350px;
-}
-/* line 140, ../sass/typica-login.scss */
-#register-form .control-inline {
-  display: inline-block;
-}
-/* line 143, ../sass/typica-login.scss */
-#register-form legend {
-  margin-bottom: 15px;
-  border-bottom: none;
-}
-/* line 147, ../sass/typica-login.scss */
-#register-form input.input-huge {
-  width: 318px;
-}
-/* line 150, ../sass/typica-login.scss */
-#register-form .control-group {
-  margin-bottom: 0;
-}
-/* line 153, ../sass/typica-login.scss */
-#register-form .checkbox.inline {
-  margin-bottom: 10px;
-  padding: 0;
-  font-size: 98%;
-}
-/* line 157, ../sass/typica-login.scss */
-#register-form .checkbox.inline input {
-  margin-right: 10px;
-}
-/* line 161, ../sass/typica-login.scss */
-#register-form .body {
-  overflow-y: auto;
-  height: auto;
-}
-/* line 165, ../sass/typica-login.scss */
-#register-form .btn {
-  padding: 10px 40px;
-  background-image: none;
-  box-shadow: none;
-}
-
-/* line 171, ../sass/typica-login.scss */
-.register-info-wraper {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* line 174, ../sass/typica-login.scss */
-#register-info {
-  position: relative;
-  padding: 25px;
-}
-/* line 177, ../sass/typica-login.scss */
-#register-info ul {
-  margin-right: 25px;
-}
-/* line 179, ../sass/typica-login.scss */
-#register-info ul li {
-  margin-bottom: 25px;
-}
-
-/* ####### */
-/* $FOOTER */
-/* ####### */
-/* line 185, ../sass/typica-login.scss */
-footer.white {
-  padding-top: 20px;
-  height: 50px;
-  background: white;
-  text-align: center;
-}
-
-/* ###### */
-/* $FONTS */
-/* ###### */
-/* navigation */
-/* line 7, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-.navbar {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-/* login form */
-/* line 17, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-.login-form legend {
-  font-family: 'Lato', Helvetica, sans-serif;
-  font-size: 36px;
-  font-weight: 300;
-  color: #333333;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-/* line 24, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-.login-form label {
-  font-family: 'Lato', Helvetica, sans-serif;
-  font-size: 20px;
-  color: #333333;
-  font-weight: 300;
-}
-
-/* register form */
-/* line 32, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-#register-form legend {
-  font-family: 'Lato', Helvetica, sans-serif;
-  font-size: 36px;
-  font-weight: 300;
-  color: #333333;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-/* line 39, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-#register-form label {
-  font-family: 'Lato', Helvetica, sans-serif;
-  font-size: 18px;
-  color: #333333;
-  font-weight: 300;
-}
-
-/* register info */
-/* line 48, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-#register-info h1 {
-  font-size: 42px;
-  font-family: "PT Sans", Arial, Helvetica, sans-serif;
-  line-height: 55px;
-  font-weight: 700;
-  text-align: right;
-  padding-bottom: 50px;
-  color: white;
-}
-/* line 57, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-#register-info ul {
-  text-align: right;
-  color: white;
-  font-size: 24px;
-  font-family: "PT Sans", Arial, Helvetica, sans-serif;
-}
-
-/* footer */
-/* line 66, D:/DropBox/bootstrap/typica-login/sass/includes/_fonts.scss */
-footer.navbar-fixed-bottom {
-  font-size: 16px;
-  font-family: "PT Sans", Arial, Helvetica, sans-serif;
-  line-height: 18px;
-  font-weight: 400;
-}
-
-/* ######## */
-/* $QUERIES */
-/* ######## */
-/* Portrait tablet*/
-@media (max-width: 980px) {
-  /* logo margin fix */
-  /* line 8, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  .navbar {
-    height: auto;
-    margin-bottom: 0;
-  }
-  /* line 9, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  .navbar .brand {
-    margin-top: 0;
-  }
-  /* line 14, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  .navbar .navbar-inner {
-    height: auto;
-  }
-
-  /* line 18, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  .navbar .nav > li > a:hover {
-    color: white;
-  }
-
-  /* line 21, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  #login-wraper {
-    position: relative;
-    top: 0;
-    margin-top: 25px;
-  }
-}
-@media (max-width: 495px) {
-  /* line 29, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  #login-wraper {
-    width: auto;
-    height: auto;
-    margin-left: 0;
-    margin-right: 0;
-    left: 0;
-  }
-
-  /* line 36, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  #register-form {
-    width: auto;
-  }
-  /* line 38, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  #register-form .control-inline {
-    display: block;
-  }
-  /* line 41, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  #register-form input {
-    display: block;
-    margin: 0 auto;
-  }
-  /* line 44, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  #register-form input.input-huge, #register-form input.input-medium {
-    width: auto;
-    display: block;
-  }
-  /* line 49, D:/DropBox/bootstrap/typica-login/sass/includes/_queries.scss */
-  #register-form .btn {
-    display: block;
-    margin: 0 auto;
-  }
+*,
+*:after,
+*::before {
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   text-decoration: none;
+   list-style-type: none;
+   outline: none;
 }
