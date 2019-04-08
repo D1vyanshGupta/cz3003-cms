@@ -13,8 +13,7 @@ class PMODispatcher:
     """
         Generates PDF report and constructs email message to send to PMO using email API
     """
-    # PMO_EMAIL = 'DIVYANSH002@e.ntu.edu.sg'
-    PMO_EMAIL = 'kaydon_chong@hotmail.com'
+    PMO_EMAIL = 'cz3003cmstest@gmail.com'
 
     def get_email_content(self):
         """

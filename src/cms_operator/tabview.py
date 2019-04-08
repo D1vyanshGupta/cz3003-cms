@@ -18,7 +18,7 @@ class NewEventView(TabView):
     tab_id = 'newevent'
     icon = 'plus-square'
     url = 'cms_operator/new'
-    title = 'New Request'
+    title = 'New Incident'
     template = 'cms_operator/new_event.html'
 
 

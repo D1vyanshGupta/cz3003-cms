@@ -11,7 +11,7 @@
     <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
         {% if user.is_staff %}
         <li class="nav-item">
-            <a href="/cms_admin/send_report" class="nav-link"> <i class="fa fa-send"></i> Send report</a>
+            <a href="#" class="nav-link email_report"> <i class="fa fa-send"></i> Send report</a>
         </li>
         {% endif %}
         {% if 'public' not in request.path %}
@@ -25,3 +25,38 @@
         {% endif %}
     </ul>
 </nav>
+<div class="modal"><!-- Place at bottom of page --></div>
+<style>
+    .modal {
+        display:    none;
+        position:   fixed;
+        z-index:    1000;
+        top:        0;
+        left:       0;
+        height:     100%;
+        width:      100%;
+        background: rgba( 255, 255, 255, .8 )
+                    url('http://i.stack.imgur.com/FhHRx.gif')
+                    50% 50%
+                    no-repeat;
+            }
+    body.loading .modal {
+        overflow: hidden;
+        }
+
+        body.loading .modal {
+            display: block;
+        }
+</style>
+<script>
+    $('.email_report').click(function (){
+        $body = $("body");
+        $body.addClass("loading");
+        $.ajax({
+            url: '/cms_admin/send_report'
+        }).done(function(d){
+            $body.removeClass("loading");
+            alert('Sent report!');
+        })
+    });
+</script>
