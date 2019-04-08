@@ -8,8 +8,8 @@ import requests
 AGENCIES = {
     # 'SAF': '+6587198478',
     # 'SCDF': '+6597741853'
-    'SAF': '+6583445307',
-    'SCDF': '+6583445307'
+    'SAF': '+6586691325',
+    'SCDF': '+6586691325'
 }
 
 import geocoder

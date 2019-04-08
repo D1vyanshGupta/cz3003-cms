@@ -25,6 +25,7 @@
         {% endif %}
     </ul>
 </nav>
+{% if user.is_staff %}
 <div class="modal"><!-- Place at bottom of page --></div>
 <style>
     .modal {
@@ -44,7 +45,7 @@
         overflow: hidden;
         }
 
-        body.loading .modal {
+    body.loading .modal {
             display: block;
         }
 </style>
@@ -60,3 +61,4 @@
         })
     });
 </script>
+{% endif %}
